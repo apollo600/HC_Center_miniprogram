@@ -1,0 +1,47 @@
+<!--index.wxml-->
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <nav mask="{{true}}">
+    <!-- 返回键 -->
+    <view>
+      <block wx:if="{{back}}">
+        <image src="../../images/arrow.svg" class="back-button" bindtap="back"></image>
+        <text style='display:inline-block;width:8px' bindtap="back"></text>
+      </block>
+      <block wx:else="{{back}}">
+        <text style='display:inline-block;width:10px'></text>
+      </block>
+
+      HC活动中心
+    </view>
+  </nav>
+
+  <view class="title-top" bindtap="tmp_clear">
+    近期活动
+  </view>
+  
+  <view class="activity-container">
+    <!-- <view class="line"></view> -->
+    
+    <block wx:for="{{items}}" wx:key="id" wx:for-index="index">
+      <view class="activity">
+        <view class="entry">
+          <view style="white-space: pre;">{{item.short_date}}</view> 
+          <view class="note">{{item.time}}</view>
+          <view class="note">{{item.type}}</view>
+        </view>
+        <view class="time-shaft">
+          <view class="up-line"></view>
+          <view class="circle"></view>
+          <view class="down-line"></view>
+        </view>
+        <view class="content" bindtap="openItem" data-reply="{{index}}"  hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
+            <image src="{{item.imageURL}}" class="background" mode="aspectFill" ></image>
+          <!-- <view class="note1"></view> -->
+          <view class="note2"></view>
+          <text class="note-text">{{item.title}}</text>
+        </view>
+      </view>
+    </block>
+
+  </view>
+</view>

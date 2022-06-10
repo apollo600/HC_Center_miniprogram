@@ -1,0 +1,52 @@
+<!-- my.wxml -->
+<view>
+    <view class="intro" style="padding-top: {{navBarHeight}}px;">
+        <nav mask="{{false}}">
+            <!-- 返回键 -->
+            <view>
+                <block wx:if="{{back}}">
+                    <image src="../../images/arrow.svg" class="back-button" bindtap="back"></image>
+                    <text style='display:inline-block;width:8px' bindtap="back"></text>
+                </block>
+                <block wx:else="{{back}}">
+                    <text style='display:inline-block;width:10px'></text>
+                </block>
+
+                个人中心
+            </view>
+        </nav>
+        
+        <view class="info">    
+            <image src="{{faceUrl}}" mode="aspectFill" bindtap="previewFace"></image>
+            
+            <button bindtap='changeFace' hover-class="clicked">更换头像</button>
+            <view class="list-info">
+            <lable class="info-items" style="margin-top: 20rpx;">账号：{{id}}</lable>
+            <lable class="info-items">身份：{{identity}}</lable>
+         </view>     
+    </view>
+</view>
+    
+    <view class="function">
+      <view class="clear-cache" wx:if="{{identity=='老师'}}" bindtap="postInfo" hover-class="clicked">
+        <image class="item-image" src="../../images/post.svg"></image>
+        <text class="item-text">活动管理中心</text>
+        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+      </view>
+      <view class="clear-cache" catchtap="clearCache" hover-class="clicked">
+        <image class="item-image" src="../../images/clearCache.svg"></image>
+        <text class="item-text">清除缓存</text>
+        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+      </view>   
+      <view class="change-password" catchtap="changePwd" hover-class="clicked">
+        <image class="item-image" src="../../images/changePwd.svg" style="transform: scale(1.2, 1.2); "></image>
+        <text class="item-text">更改密码</text>
+        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+      </view>
+      <view class="log">
+        <button class="logOutButton" bindtap="logOut" style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top: 150rpx;">退出登录</button>
+        <button class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx">取消自动登录</button>
+      </view>
+    </view>
+
+</view>

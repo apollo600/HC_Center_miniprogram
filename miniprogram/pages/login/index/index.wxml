@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view>
+    <view class="background"></view>
+    <nav>
+        <view style="color: #FFFFFF; font-size: small; padding-left: 5rpx;">{{testdate}}</view>
+    </nav>
+    
+    <view class="container">
+        <view class="title">
+            <image src="https://636c-cloud1-1gb1yapbda6aac93-1306747047.tcb.qcloud.la/logo%20(2).png?sign=37b00ba339f3942db2d58d0fc814200b&t=1652277967" style="width: 70%;" mode="aspectFit"></image>
+        </view>
+        <view class="input">
+            <view class="title">账号</view>
+            <input type="digit" value="{{account}}" placeholder="请输入" bindblur="accountChanged"></input>
+        </view>
+        <view class="input">
+            <view class="title">密码</view>
+            <input type="password" value="{{inputPassword}}" placeholder="请输入" bindblur="inputPasswordChanged"/>
+        </view>
+        <view class="toolbar">
+            <view class="rememberme">
+                <checkbox checked="{{rememberme}}" style="transform: scale(0.7,0.7);" color="{{themeColor}}" bindtap="remembermeChanged"></checkbox>
+                <text>下次自动登录</text>   
+            </view>
+            <view class="help" bindtap="showHelp">
+                帮助
+            </view>
+        </view>
+        <view class="login">
+            <button type="default" disabled="{{loginDisabled}}" hover-class="button-hover" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+        </view>
+        <!-- <view class="toolbar">
+            <view class="help2" bindtap="showHelp">
+                注册账号
+            </view>
+            <view class="help" bindtap="showHelp">
+                忘记密码
+            </view>
+        </view> -->
+    </view>
+</view>

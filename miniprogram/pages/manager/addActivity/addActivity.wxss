@@ -1,0 +1,2 @@
+@import "/pages/manager/manager.wxss";
+@import "/weui-wxss-master/dist/style/weui.wxss";

@@ -1,0 +1,146 @@
+page {
+    background-color: #ffffff;
+    font-family: 'Source Sans Pro', arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.intro {
+    background-color: var(--themeColor);
+    height: 45%;
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: space-around;
+    box-sizing: border-box;
+    padding-bottom: 30rpx;
+}
+
+.info{
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color:#ffffff;
+}
+
+.info image{
+    text-align: center;
+    border-radius: 100rpx;
+    width: 200rpx; 
+    height: 200rpx;
+    margin-top: 40rpx;
+    overflow: hidden;
+}
+
+.info button {
+    height:60rpx; 
+    width:180rpx;
+    color:white; 
+    background-color: #2669af; 
+    margin-top: 30rpx; 
+    font-size:35rpx; 
+    padding-left: 0;
+    padding-right: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.list-info{
+  display: flex;
+  flex-direction: column;
+}
+
+.function {
+    width: 90%;
+    height: 55%;
+    margin-top: 30rpx;
+    margin-left: 5%;
+    /* background: #f0eeed; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  
+  .post-info {
+    background-color:rgba(247, 247, 247, 0.747);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    /* top: 620rpx; */
+    margin-top: 20rpx;
+    position: relative; /*父元素位置要设置为相对*/
+    background: white;
+  }
+
+  .clicked {
+      background: grey;
+      filter: opacity(80%);
+      transform: scale(0.95, 0.95);
+  }
+
+  .clear-cache {
+    background-color:rgba(247, 247, 247, 0.747);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    /* top: 620rpx; */
+    margin-top: 20rpx;
+    position: relative; /*父元素位置要设置为相对*/
+    background: white;
+  }
+  
+  .change-password{
+    background-color:rgba(247, 247, 247, 0.747);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 80rpx;
+    /* top: 620rpx; */
+    margin-top: 20rpx;
+    position: relative; /*父元素位置要设置为相对*/
+    background: white;
+  }
+
+  .item-image {
+      
+    width: 50rpx;
+    height: 50rpx;
+    margin: 20rpx;
+  }
+  
+  .item-text {
+   
+    color: gray;
+    font-size: 35rpx;
+    margin-left: 20rpx;
+  }
+  
+  .image-jiantou {
+      
+    width: 20rpx;
+    height: 35rpx;
+    position: absolute; /* 要约束所在位置的子元素的位置要设置成绝对 */
+    right: 0; /* 靠右调节 */
+    margin-right: 35rpx;
+  }
+
+.log{
+    
+    color:black;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+    border-radius: 10rpx;
+    margin-top: 50rpx;
+
+}

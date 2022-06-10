@@ -1,0 +1,20 @@
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+    <nav mask="true">
+        <!-- 返回键 -->
+        <block wx:if="{{back}}">
+            <image src="/images/arrow.svg" class="back-button" bindtap="back"></image>
+            <text style='display:inline-block;width:8px' bindtap="back"></text>
+        </block>
+        <block wx:else="{{back}}">
+            <text style='display:inline-block;width:10px'></text>
+        </block>
+
+        HC活动中心
+    </nav>
+
+    <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">
+        <wemark md="{{md_text}}" highlight type="wemark"></wemark>
+        <loadmore loading="{{false}}" ></loadmore>
+        <button type="primary" bindtap="signClicked">参加报名</button>
+    </view>
+</view>

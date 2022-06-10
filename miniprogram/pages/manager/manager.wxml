@@ -1,0 +1,57 @@
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+  <nav mask="{{true}}">
+    <!-- 返回键 -->
+    <view>
+      <block wx:if="{{back}}">
+        <image src="../../images/arrow.svg" class="back-button" bindtap="back"></image>
+        <text style='display:inline-block;width:8px' bindtap="back"></text>
+      </block>
+      <block wx:else="{{back}}">
+        <text style='display:inline-block;width:10px'></text>
+      </block>
+
+      活动管理
+    </view>
+  </nav>
+
+  <view class="tool-bar">
+    <view class="search" hover-class="search-clicked" hover-start-time="50" hover-stay-time="200">
+        <view wx:if="{{onSearch}}" class="bg" style="filter:opacity(90%);"></view>
+        <view wx:else="{{onSearch}}" class="bg" style="filter:opacity(60%);"></view>
+        <input type="text" value="{{searchContent}}" bindfocus="searchClicked" bindblur="searchCompleted" bindconfirm="searchCompleted_Left"/>
+        <image src="../../images/search.svg" bindtap="searchLeft"></image>
+    </view>
+    <view class="icon_field" hover-class="icon-clicked" hover-start-time="50" hover-stay-time="200" bindtap="add_clicked">
+        <image class="icon" src="../../images/add_bold.svg"></image>
+    </view>
+    <view class="icon_field" hover-class="icon-clicked" hover-start-time="200" hover-stay-time="50" bindtap="delete_clicked">
+        <image wx:if="{{!onDelete}}" class="icon" src="../../images/minus_bold.svg"></image>
+        <image wx:if="{{onDelete}}" class="onDelete" src="../../images/rubbish_bin.svg"></image>
+    </view>
+    <view class="icon_field" hover-class="icon-clicked" hover-start-time="50" hover-stay-time="200" bindtap="edit_clicked">
+        <image wx:if="{{!onEdit}}" class="icon" src="../../images/edit-fill.svg"></image>
+        <image wx:if="{{onEdit}}" class="onEdit" src="../../images/edit-fill.svg"></image>
+    </view>
+  </view>
+
+    <view class="activity-container">
+        <view wx:for="{{items}}" class="test" bindtap="openItem" data-reply="{{index}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
+            <block>
+                <view class="{{(onEdit || onDelete) && item.isSelected ? 'flow' : ''}}"></view>
+                <view class="{{(onEdit || onDelete) && !item.isSelected ? 'mask' : ''}}"></view>
+            </block>
+            <view class="activity">
+                <image src="{{item.imageURL}}" class="picture" mode="aspectFill" ></image>
+                <view class="title">{{item.title}}</view>
+                <view class="bottom-container">
+                    <image class="icon" src="../../images/people.svg" ></image>
+                    <view class="type">{{item.type}}</view>
+                    <view class="middle">·</view>
+                    <view class="time">{{item.date}}</view>
+                </view>
+            </view>
+        </view>
+
+        <button wx:if="{{showSearch}}" class="weui-btn weui-btn_primary" aria-role="button" bindtap="cancelSearch" style="background-color: #2088ef;">返回</button>
+    </view>
+</view>

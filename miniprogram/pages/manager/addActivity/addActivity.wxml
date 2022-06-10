@@ -1,0 +1,115 @@
+<view class="container" style="padding-top: {{navBarHeight}}px;">
+    <nav mask="{{true}}">
+    <!-- 返回键 -->
+    <view style="display: flex; align-items: center;">
+        <block wx:if="{{back}}">
+            <image src="../../../images/arrow.svg" class="back-button" bindtap="back"></image>
+            <text style='display:inline-block;width:8px' bindtap="back"></text>
+        </block>
+        <block wx:else="{{back}}">
+            <text style='display:inline-block;width:10px;'></text>
+        </block>
+
+        管理活动
+        </view>
+    </nav>
+
+    <view class="activity-container" style="margin-top: 40rpx; padding-left: 2rpx; padding-right: 2rpx; padding-bottom: 50rpx; width: 675rpx;">
+
+        <view class="weui-form__control-area">
+            <view class="weui-form__text-area">
+                <h2 class="weui-form__title">活动信息</h2>
+                <view class="weui-form__desc"></view>
+            </view>
+
+			<view class="weui-cells__group weui-cells__group_form">
+				<view class="weui-cells">
+                    
+					<view class="weui-cell weui-cell_active">
+						<view class="weui-cell__hd"><label class="weui-label">活动名称</label></view>
+						<view class="weui-cell__bd">
+							<input class="weui-input" placeholder="填写活动名称" placeholder-class="weui-input__placeholder" bindblur="titleChanged" value="{{title}}"/>
+						</view>
+					</view>
+
+                    <view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-before">
+						<view class="weui-cell__bd" ><label class="weui-label">活动类别</label></view>
+                        <view class="weui-cell__hd" style="position: relative;">
+                            <picker aria-role="combobox" bindchange="typeChanged" range="{{types}}">
+                                <view class="weui-select" style="padding-right: 185rpx; padding-left: 0rpx;">{{types[typeIndex]}}</view>
+                            </picker>
+						</view>
+					</view>
+                    
+                    <view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-before">
+                        <view class="weui-cell__bd"><label class="weui-label">活动日期</label></view>
+						<view class="weui-cell__hd">
+                            <picker mode="date" value="{{date}}"  bindchange="dateChanged">
+                                <view class="weui-select" style="padding-right: 185rpx; padding-left: 0rpx;">{{date}}</view>
+                            </picker>
+						</view>
+					</view>
+
+                    <view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-before">
+                        <view class="weui-cell__bd"><label class="weui-label">活动时间</label></view>
+						<view class="weui-cell__hd">
+                            <picker mode="time" value="{{time}}" bindchange="timeChanged">
+                                <view class="weui-select" style="padding-right: 185rpx; padding-left: 0rpx;">{{time}}</view>
+                            </picker>
+						</view>
+					</view>
+
+					<view class="weui-cell weui-cell_uploader">
+                        <view class="weui-cell__bd">
+                            <view class="weui-uploader">
+                                <view class="weui-uploader__hd">
+                                <view aria-role="option" class="weui-uploader__overview">
+                                    <view class="weui-uploader__title">活动图片</view>
+                                    <view class="weui-uploader__info">{{images.length}}/1</view>
+                                </view>
+                                <view class="weui-uploader__tips">
+                                    上传图片
+                                </view>
+                                </view>
+                                <view class="weui-uploader__bd">
+                                    <view class="weui-uploader__files" id="uploaderFiles">
+                                        <block wx:if="{{uploadCompleted}}" wx:for="{{images}}" wx:key="*this">
+                                            <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                                                <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"/>
+                                            </view>
+                                        </block>
+                                        <view wx:if="{{onUpload && !uploadCompleted}}" class="weui-uploader__file weui-uploader__file_status">
+                                            <view aria-role="alert" class="weui-uploader__file-content">
+                                            <view aria-role="img" aria-label="上传中" class="weui-loading"></view>
+                                            </view>
+                                        </view>    
+                                    </view>
+                                    <view class="weui-uploader__input-box">
+                                        <view aria-role="button" aria-label="上传" class="weui-uploader__input" bindtap="chooseImage"></view>
+                                    </view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+
+                    <view class="weui-form__text-area" style="margin-top: 50rpx;">
+                        <h2 class="weui-form__title">活动详情</h2>
+                        <view class="weui-form__desc"></view>
+                    </view>
+
+                    <view class="weui-cells__title" style="padding-left: 16px; color: #A9A9A9;">支持使用Markdown语法</view>
+                    <view class="weui-cell" hover-class="weui-cell_active">
+                        <view class="weui-cell__bd">
+                            <textarea class="weui-textarea" auto-height placeholder="请输入活动详情内容" placeholder-class="weui-input__placeholder" rows="4" style="min-height: 200rpx;" maxlength="-1" value="{{content}}" bindconfirm="contentChanged" bindblur="contentChanged"></textarea>
+                            <view aria-role="option" class="weui-textarea-counter"><span>0</span>/200</view>
+                        </view>
+                    </view>
+
+                    <button class="weui-btn weui-btn_default" aria-role="button" url="../preview/preview?contentID={{contentID}}" style="color: #2088ef; background-color: #f2f2f2;" bindtap="previewActivity">预览活动</button>
+                    <button class="weui-btn weui-btn_primary" aria-role="button" bindtap="releaseActivity" style="background-color: #2088ef;">发布活动</button>
+                    
+				</view>
+			</view>
+        </view>
+    </view>
+</view>
