@@ -20,7 +20,7 @@ Page({
         })
         .then(res => {
             console.log("http链接",res.tempFilePath);
-            md = `# ${item.title}\n\n> 举办时间：${item.t1}\n\n>发布时间：${item.t2}\n\n![title-image](${item.imageURL})\n\n${fs.readFileSync(res.tempFilePath,"utf-8")}`;
+            md = `# ${item.title}\n\n> 举办时间：${item.time1}\n\n>发布时间：${item.time2}\n\n![title-image](${item.imageURL})\n\n${fs.readFileSync(res.tempFilePath,"utf-8")}`;
             
             console.log("文件正文处理后:", md);
             that.setData({

@@ -11,7 +11,8 @@ let item = {
     d: undefined,
     imageURL: "",
     contentID: "",
-    ID: ""
+    ID: "",
+    releaseDate:""
 };
 
 function dateFormat(fmt, date) {
@@ -50,7 +51,8 @@ Page ({
         uploadCompleted: false,
         onUpload: false,
         contentID: "",
-        content: ""
+        content: "",
+        releaseDate:""
     },
 
     onShow() {
@@ -60,13 +62,14 @@ Page ({
             date: wx.getStorageSync('date'),
             time: wx.getStorageSync('time'),
             images: wx.getStorageSync('images'),
-            content: wx.getStorageSync('content')
+            content: wx.getStorageSync('content'),
+            releaseDate: wx.getStorageSync('releaseDate')
         })
         console.log("缓存恢复数据完毕",this.data);
     },
 
     onUnload() {
-        let _clr = ['title', 'typeIndex', 'date', 'time', 'images', 'content']
+        let _clr = ['title', 'typeIndex', 'date', 'time', 'images', 'content','releaseDate']
         for (let s in _clr) {
             wx.clearStorageSync(s);
         }
@@ -211,6 +214,7 @@ Page ({
             item.d = new Date(that.data._date[0], that.data._date[1] - 1, that.data._date[2], that.data._time[0], that.data._time[1]);
             item.imageURL = that.data.images[0]
             item.ID = `${that.data.date}_${that.data.time}_${item.type}_${item.title}`
+            item.releaseDate = new Date();
             console.log("存储至item完成:",item);
 
             // 存入数据库
@@ -237,7 +241,8 @@ Page ({
                                     type: item.type,
                                     d: item.d,
                                     imageURL: item.imageURL,
-                                    contentID: item.contentID
+                                    contentID: item.contentID,
+                                    releaseDate: item.releaseDate
                                 },
                             })
                             .then(res => {
@@ -278,7 +283,8 @@ Page ({
                                 type: item.type,
                                 d: item.d,
                                 imageURL: item.imageURL,
-                                contentID: item.contentID
+                                contentID: item.contentID,
+                                releaseDate: item.releaseDate
                             },
                         })
                         .then(res => {
@@ -382,12 +388,13 @@ Page ({
             item.d = new Date(that.data._date[0], that.data._date[1] - 1, that.data._date[2], that.data._time[0], that.data._time[1]);
             item.imageURL = that.data.images[0]
             item.ID = `${that.data.date}_${that.data.time}_${item.type}_${item.title}`
+            item.releaseDate = new Date()
             console.log("存储至item完成:",item);
             
             wx.hideLoading();
             console.log("跳转至:",that.data.contentID);
             wx.navigateTo({
-                url: `../preview/preview?title=${item.title}&time1=${dateFormat("YY-mm-dd HH:MM", item.d)}&time2=${dateFormat("YY-mm-dd HH:MM", new Date())}&imageURL=${item.imageURL}&contentID=${item.contentID}`,
+                url: `../preview/preview?title=${item.title}&time1=${dateFormat("YY-mm-dd HH:MM", item.d)}&time2=${dateFormat("YY-mm-dd HH:MM",item.releaseDate)}&imageURL=${item.imageURL}&contentID=${item.contentID}`,
             })
         })
     }

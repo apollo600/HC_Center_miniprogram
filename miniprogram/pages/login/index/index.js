@@ -6,6 +6,17 @@ const _ = db.command;
 const MAX_LIMIT = 20;
 const key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
 
+// for(var i = 0; i < 7; i++){
+//     db.collection('eventInfo').where({}).update({
+//         data:{
+//             releaseDate: 'Sun May 1 2022 00:00:00 GMT+0800 (中国标准时间)'
+//         },
+//         success: function(res){
+//             console.log(res)
+//         }
+//     })
+// }
+
 // for(var i = 10; i < 100; i++){
 //     db.collection('userInfo').add({
 //         data:{

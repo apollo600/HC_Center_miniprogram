@@ -1,6 +1,8 @@
 const app = getApp();
 const fs = wx.getFileSystemManager();
 
+
+
 function dateFormat(fmt, date) {
     let ret;
     const opt = {
@@ -41,7 +43,8 @@ Page ({
         })
         .then(res => {
             console.log("http链接",res.tempFilePath);
-            md = `# ${item.title}\n\n> 举办时间：${dateFormat("YY-mm-dd HH:MM", item.d)}\n\n>发布时间：${dateFormat("YY-mm-dd HH:MM", new Date())}\n\n![title-image](${item.imageURL})\n\n${fs.readFileSync(res.tempFilePath,"utf-8")}`;
+            console.log(item);
+            md = `# ${item.title}\n\n> 举办时间：${dateFormat("YY-mm-dd HH:MM", item.d)}\n\n>发布时间：${dateFormat("YY-mm-dd HH:MM", item.releaseDate)}\n\n![title-image](${item.imageURL})\n\n${fs.readFileSync(res.tempFilePath,"utf-8")}`;
             
             console.log("文件正文处理后:", md);
             that.setData({
