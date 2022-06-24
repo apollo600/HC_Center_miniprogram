@@ -413,10 +413,16 @@ Page({
     edit_clicked() {
         let that = this;
         if (!that.data.onEdit) {
-            this.setData({
-                onEdit: !this.data.onEdit
+            that.setData({
+                onEdit: !that.data.onEdit
             })
-            console.log("onEdit", this.data.onEdit);
+            console.log("onEdit", that.data.onEdit);
+        }
+        else if (that.data.onEdit) {
+            that.setData({
+                onEdit: !that.data.onEdit
+            })
+            console.log("onEdit", that.data.onEdit);
         }
         else {
             let _items = that.data.items;

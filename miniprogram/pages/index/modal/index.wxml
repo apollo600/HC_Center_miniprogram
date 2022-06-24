@@ -16,7 +16,7 @@
     <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">
         <wemark md="{{md_text}}" highlight type="wemark"></wemark>
         <!-- <loadmore loading="{{false}}" ></loadmore> -->
-        <!-- <button type="primary" bindtap="signClicked">参加报名</button> -->
+        <button type="primary" bindtap="signClicked">参加报名</button>
     </view>
 </view>
 

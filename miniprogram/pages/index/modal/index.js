@@ -60,10 +60,27 @@ Page ({
     },
 
     signClicked() {
-        wx.navigateToMiniProgram({
-          appId: 'wxd947200f82267e58',
-          path: "pages/wjxqList/wjxqList?activityId=e4hxWyw"
-        //   path: 'pages/show/show'
+        // wx.navigateToMiniProgram({
+        //   appId: 'wxd947200f82267e58',
+        //   path: "pages/wjxqList/wjxqList?activityId=e4hxWyw"
+        // //   path: 'pages/show/show'
+        // })
+        wx.showModal({
+            title: '提示',
+            content: '确定报名该活动吗？',
+            success (res){
+                if (res.confirm) {
+                    console.log('用户点击确认')
+
+                    wx.showToast({
+                        title: '报名成功！',
+                        icon: 'success'
+                    })
+                }else if (res.cancel) {
+                    console.log('用户点击取消')
+                }
+            }
+        
         })
     }
 })

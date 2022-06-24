@@ -17,6 +17,19 @@ const key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
 //     })
 // }
 
+// for(var i = 0; i < 10; i++){
+//     db.collection('userInfo').add({
+//         data:{
+//             id: 2020300000 + i,
+//             password: util.AES_ECB_ENCRYPT('000'+ i.toString(),key),
+//             isTeacher: false
+//         },
+//         success: function(res){
+//             console.log(res)
+//         }
+//     })
+// }
+
 // for(var i = 10; i < 100; i++){
 //     db.collection('userInfo').add({
 //         data:{
@@ -29,6 +42,18 @@ const key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
 //         }
 //     })
 // }
+
+// db.collection('userInfo').add({
+//     data:{
+//         id:777,
+//         password:util.AES_ECB_ENCRYPT('123',key),
+//         isTeacher:true
+//     },
+//     success:function(res){
+//         console.log(res)
+//     }
+// })
+
 
 // for(var i = 0; i < 100; i++){
 //     try{
@@ -101,12 +126,12 @@ Page({
                 for(var i = 0; i < _res.length; i++){
                     if(that.data.account == _res[i].id) {
                         flag = 1;
-                        // console.log(that.data.inputPassword)
+                         
                         // console.log(typeof(util.AES_ECB_DECRYPT(_res[i].password, key)))
                         wx.setStorageSync('password', util.AES_ECB_DECRYPT(_res[i].password, key));
                         app.globalData['password'] = util.AES_ECB_DECRYPT(_res[i].password, key);
                         console.log("存储全局变量password",app.globalData['password']);  
-
+                        console.log("密码：",util.AES_ECB_DECRYPT(_res[i].password, key));
                         if(util.AES_ECB_DECRYPT(_res[i].password, key) == that.data.inputPassword){
                             wx.setStorageSync('account', that.data.account);
                             wx.setStorageSync('isTeacher', _res[i].isTeacher);  
