@@ -379,17 +379,55 @@ Page({
             .then(res => {
                 console.log("是否删除:", res.confirm);
                 if (res.confirm) {
-                    
                     // 进行删除
                     for (let i = 0; i < _items.length; ++i) {
                         if (_items[i].isSelected) {
                             console.log("删除第",i,"项","ID为:",_items[i].ID);
+                            // let _members = [];
                             db.collection('eventInfo').where({
                                 ID: _.eq(_items[i].ID)
                             })
+                            // .get({success: function(res) {
+                            //     console.log("要删除的数据为:",res.data[0]);
+                            //     _members = res.data[0].members;
+                            //     console.log(_members);
+                            //     for (let i = 0; i < _members.length; i++) {
+                            //         let _eventsID = [];
+                            //         let member = _members[i];
+                            //         console.log("处理", member.account);
+                            //         db.collection('userInfo').where({
+                            //             id: parseInt(member.account)
+                            //         })
+                            //         .get({
+                            //             success: function(res) {
+                            //                 console.log(res);
+                            //                 _eventsID = res.data[0].signedUpEventsID;
+                            //                 console.log("删除前:", _eventsID);
+                            //                 if (_eventsID.indexOf(_items[i].ID) != -1) {
+                            //                     _eventsID.splice(_eventsID.indexOf(_items[i].ID), 1);
+                            //                     console.log("删除后:", _eventsID);
+                            //                     db.collection('userInfo').where({
+                            //                         id: parseInt(member.account)
+                            //                     })
+                            //                     .update({
+                            //                         data: {
+                            //                             signedUpEventsID: _eventsID
+                            //                         }
+                            //                     })
+                            //                     .then(res => {
+                            //                         console.log(member.account, res);
+                            //                     })
+                            //                 }
+                            //             }
+                            //         })
+                            //     }
+                            // }})
+                            
                             .remove()
                             .then(res => {
                                 console.log("从数据库删除", res);
+                                // 从每个报名的学生中删除这一项
+                                
                             })
                             .catch(err => {
                                 console.error(err);
