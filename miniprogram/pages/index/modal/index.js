@@ -69,68 +69,78 @@ Page ({
         //   path: "pages/wjxqList/wjxqList?activityId=e4hxWyw"
         // //   path: 'pages/show/show'
         // })
-        wx.showModal({
-            title: '',
-            content: '确定报名该活动吗？',
-            success (res) {
-                if (res.confirm) {
-                    console.log('用户点击确认, account:', app.globalData.account);
-                    console.log("更改前成员集合: ", item.members);
-                    let _push = true;
-                    item.members.forEach(element => {
-                        if (element.account === app.globalData.account) {
-                            _push = false;
-                        }
-                    });
-                    if (_push){
-                        item.members.push({
-                            "account": app.globalData.account,
-                            "name": app.globalData.name
+        if (app.globalData.isTeacher) {
+            wx.showModal({
+            content: "老师无需报名活动~",
+            showCancel: false
+            },
+            () => {
+                return;
+            })
+        }
+        else{
+            wx.showModal({
+                title: '',
+                content: '确定报名该活动吗？',
+                success (res) {
+                    if (res.confirm) {
+                        console.log('用户点击确认, account:', app.globalData.account);
+                        console.log("更改前成员集合: ", item.members);
+                        let _push = true;
+                        item.members.forEach(element => {
+                            if (element.account === app.globalData.account) {
+                                _push = false;
+                            }
                         });
-                        console.log("更改后成员集合:", item.members);
-                    let userItem;
-                    db.collection('userInfo').where({
-                        id: parseInt(app.globalData.account)
-                    })
-                    .get()
-                    .then(res => {
-                        console.log(res);
-                        userItem = res.data[0];
-                        let eventIDs = [];
-                        eventIDs = userItem.signedUpEventsID;
-                        console.log(item);
-                        eventIDs.push(item.ID);
+                        if (_push){
+                            item.members.push({
+                                "account": app.globalData.account,
+                                "name": app.globalData.name
+                            });
+                            console.log("更改后成员集合:", item.members);
+                        let userItem;
                         db.collection('userInfo').where({
                             id: parseInt(app.globalData.account)
-                        }).update({
-                            data: {
-                                signedUpEventsID: eventIDs
-                            }
-                        });
-                        db.collection('eventInfo').where({
-                            ID: _.eq(item.ID)
-                        }).update({
-                            data: {
-                                members: item.members
-                            }
                         })
+                        .get()
                         .then(res => {
-                            console.log(res)
-                            wx.showToast({
-                                title: '报名成功！',
-                                icon: 'success'
+                            console.log(res);
+                            userItem = res.data[0];
+                            let eventIDs = [];
+                            eventIDs = userItem.signedUpEventsID;
+                            console.log(item);
+                            eventIDs.push(item.ID);
+                            db.collection('userInfo').where({
+                                id: parseInt(app.globalData.account)
+                            }).update({
+                                data: {
+                                    signedUpEventsID: eventIDs
+                                }
+                            });
+                            db.collection('eventInfo').where({
+                                ID: _.eq(item.ID)
+                            }).update({
+                                data: {
+                                    members: item.members
+                                }
                             })
-                            wx.navigateBack({
-                            delta: 1,
+                            .then(res => {
+                                console.log(res)
+                                wx.showToast({
+                                    title: '报名成功！',
+                                    icon: 'success'
+                                })
+                                wx.navigateBack({
+                                delta: 1,
+                                })
                             })
                         })
-                    })
-                    }
-                } else if (res.cancel) {
-                    console.log('用户点击取消')
-                }
+                        }
+                    } else if (res.cancel) {
+                        console.log('用户点击取消')
+                    }                   
             }
-        
         })
+        }
     }
 })

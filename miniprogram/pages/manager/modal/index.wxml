@@ -35,28 +35,18 @@
         </block>
         
         <block wx:if="{{current == 'tab2'}}">
-            <wux-virtual-list
-                id="wux-virtual-list"
-                enablePageScroll
-                height="{{ height }}"
-                itemHeight="100"
-                itemBuffer="30"
-                disableScroll="{{ disableScroll }}"
-                bind:change="onChange"
-            >
-                <wux-virtual-item>
-                    <view class="item">
-                        <view class="index">学号</view>
-                        <view class="desc">姓名</view>
-                    </view>
-                </wux-virtual-item>
-                <wux-virtual-item wx:for="{{ members }}" wx:key="item" style="min-height: 100rpx;">
-                    <view class="item">
-                        <view class="index">{{ item.account }}</view>
-                        <view class="desc">{{ item.name }}</view>
-                    </view>
-                </wux-virtual-item>
-            </wux-virtual-list>
+            <wux-virtual-item style="height: 500rpx; background-color: blue;">
+                <view class="item">
+                    <view class="index">学号</view>
+                    <view class="desc">姓名</view>
+                </view>
+            </wux-virtual-item>
+            <wux-virtual-item wx:for="{{ members }}" wx:key="item">
+                <view class="item">
+                    <view class="index">{{ item.account }}</view>
+                    <view class="desc">{{ item.name }}</view>
+                </view>
+            </wux-virtual-item>
         </block>
     </view>
 </view>

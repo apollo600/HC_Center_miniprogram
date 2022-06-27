@@ -134,11 +134,14 @@ Page({
                         console.log("存储全局变量password",app.globalData['password']);  
                         console.log("密码：",util.AES_ECB_DECRYPT(_res[i].password, key));
                         if(util.AES_ECB_DECRYPT(_res[i].password, key) == that.data.inputPassword){
+                            console.log("用户信息", _res[i]);
                             wx.setStorageSync('account', that.data.account);
                             wx.setStorageSync('isTeacher', _res[i].isTeacher);  
+                            wx.setStorageSync('name', _res[i].name);
                             app.globalData.account = that.data.account;
                             app.globalData.isTeacher = _res[i].isTeacher;
-                            app.globalData['loggedIn'] = true;
+                            app.globalData.loggedIn = true;
+                            app.globalData.name = _res[i].name;
                             wx.showToast({
                                 title: '登录成功',
                                 icon:'su'

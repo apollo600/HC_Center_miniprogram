@@ -49,9 +49,10 @@
         <image class="image-jiantou" src="../../images/jiantou.svg"></image>
       </view>
       <view class="log">
-        <button class="logOutButton" bindtap="logOut" style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top: 150rpx;">退出登录</button>
-        <button wx:if="{{rememberme}}" class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx">取消自动登录</button>
-        <button wx:if="{{!rememberme}}" class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx; color: #f9f9f9">开启自动登录</button>
+        
+        <button class="weui-btn weui-btn_primary" aria-role="button" bindtap="logOut" style="background-color: #2088ef; margin-top: 50rpx;">退出登录</button>
+        <button wx:if="{{rememberme}}" class="weui-btn weui-btn_default" aria-role="button" style="color: #2088ef; background-color: #f2f2f2;" bindtap="cancelAutomaticLogin">取消自动登录</button>
+        <button wx:if="{{!rememberme}}" class="weui-btn weui-btn_default" aria-role="button" style="color: #2088ef; background-color: #f2f2f2;" bindtap="cancelAutomaticLogin">开启自动登录</button>
       </view>
     </view>
 

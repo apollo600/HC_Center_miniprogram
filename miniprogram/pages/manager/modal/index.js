@@ -28,7 +28,7 @@ Page ({
         back: true,
         md_text: undefined,
         current: "tab1",
-        members: []
+        members: undefined
     },
 
     onLoad(options) {
@@ -45,11 +45,13 @@ Page ({
             console.log("http链接",res.tempFilePath);
             console.log(item);
             md = `# ${item.title}\n\n> 举办时间：${dateFormat("YY-mm-dd HH:MM", item.d)}\n\n>发布时间：${dateFormat("YY-mm-dd HH:MM", item.releaseDate)}\n\n![title-image](${item.imageURL})\n\n${fs.readFileSync(res.tempFilePath,"utf-8")}`;
-            
             console.log("文件正文处理后:", md);
             that.setData({
                 md_text: md,
                 members: item.members
+            }, () => {
+                console.log("members渲染完成: ", that.data.members);
+                return;
             })
         })
         .catch(err => {

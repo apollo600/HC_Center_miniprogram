@@ -28,7 +28,8 @@ App({
       themeColor: "#2669af",
       userInfo: undefined,
       d_items: [],
-      hasReload: false, // 只用于告诉主页面需不需要重新加载
+      hasReload: false, // 只用于告诉主页面需不需要重新加载,
+      name: undefined
     }
 
     this.setNavBarInfo().then(

@@ -1,11 +1,6 @@
 @import "../../../wux-weapp/example/assets/styles/example.wxss";
 @import "../../index/index.wxss";
 
-.member {
-    width: 200rpx;
-    display: flex;
-}
-
 .item {
     box-sizing: border-box;
     display: flex;
@@ -25,4 +20,9 @@
     position: absolute;
     left: 65%;
     flex: 4;
+}
+
+wux-virtual-list {
+    min-height: 300rpx;
+    background-color: aqua;
 }
