@@ -10,7 +10,7 @@ Page ({
         id:"",
         identity:"",
         faceUrl: "",
-        
+        rememberme: undefined
     },
 
     onLoad() {
@@ -20,10 +20,13 @@ Page ({
         that.setData({
             id: app.globalData.account,
             identity: status,
-            faceUrl: face
+            faceUrl: face,
+            rememberme: app.globalData['rememberme']
         }, () => {
+            console.log("rememberme: ", that.data.rememberme);
             return;
         })
+
     },
 
     logOut: function () {
@@ -49,7 +52,12 @@ Page ({
       },
 
       cancelAutomaticLogin:function(){
-        wx.setStorageSync('rememberme', false);
+            let t_rememberme = !this.data.rememberme;
+            wx.setStorageSync('rememberme', t_rememberme);
+            app.globalData.rememberme = t_rememberme;
+            this.setData({
+                rememberme: t_rememberme
+            })
       },
 
       changePwd:function(){

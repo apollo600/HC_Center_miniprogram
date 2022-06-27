@@ -45,7 +45,8 @@
       </view>
       <view class="log">
         <button class="logOutButton" bindtap="logOut" style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top: 150rpx;">退出登录</button>
-        <button class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx">取消自动登录</button>
+        <button wx:if="{{rememberme}}" class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx">取消自动登录</button>
+        <button wx:if="{{!rememberme}}" class="cancelAutomaticLoginButton" bindtap="cancelAutomaticLogin"style="background-color:rgba(211, 211, 211, 0.568); width:80%; margin-top:30rpx; color: #f9f9f9">开启自动登录</button>
       </view>
     </view>
 

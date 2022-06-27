@@ -214,8 +214,8 @@ Page({
         this.setData({
             rememberme: t_rememberme
         })
-        app.globalData.loggedIn=t_rememberme;
-        console.log(app.globalData.loggedIn);
+        app.globalData.rememberme = t_rememberme;
+        console.log("global rememberme: ", app.globalData.rememberme);
         wx.setStorageSync('rememberme', t_rememberme);
     },
     
