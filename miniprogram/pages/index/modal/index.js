@@ -105,43 +105,46 @@ Page ({
                                 "name": app.globalData.name
                             });
                             console.log("更改后成员集合:", item.members);
-                        let userItem;
-                        db.collection('userInfo').where({
-                            id: parseInt(app.globalData.account)
-                        })
-                        .get()
-                        .then(res => {
-                            console.log(res);
-                            userItem = res.data[0];
-                            let eventIDs = [];
-                            eventIDs = userItem.signedUpEventsID;
-                            console.log(item);
-                            eventIDs.push(item.ID);
+                            let userItem;
                             db.collection('userInfo').where({
                                 id: parseInt(app.globalData.account)
-                            }).update({
-                                data: {
-                                    signedUpEventsID: eventIDs
-                                }
-                            });
-                            db.collection('eventInfo').where({
-                                ID: _.eq(item.ID)
-                            }).update({
-                                data: {
-                                    members: item.members
-                                }
                             })
+                            .get()
                             .then(res => {
-                                console.log(res)
-                                wx.showToast({
-                                    title: '报名成功！',
-                                    icon: 'success'
+                                console.log(res);
+                                userItem = res.data[0];
+                                let eventIDs = [];
+                                eventIDs = userItem.signedUpEventsID;
+                                console.log(item);
+                                eventIDs.push(item.ID);
+                                db.collection('userInfo').where({
+                                    id: parseInt(app.globalData.account)
+                                }).update({
+                                    data: {
+                                        signedUpEventsID: eventIDs
+                                    }
                                 })
-                                wx.navigateBack({
-                                    delta: 1,
+                                .then(()=>{
+                                    db.collection('eventInfo').where({
+                                        ID: _.eq(item.ID)
+                                    }).update({
+                                        data: {
+                                            members: item.members
+                                        }
+                                    })
+                                    .then(res => {
+                                        console.log(res)
+                                        wx.showToast({
+                                            title: '报名成功！',
+                                            icon: 'success'
+                                        })
+                                        wx.navigateBack({
+                                            delta: 1,
+                                        })
+                                    })
                                 })
                             })
-                        })
+                            
                         }else{
                             wx.showToast({
                               title: '不可重复报名！',

@@ -99,7 +99,7 @@ Page({
         let that = this;
         let _res = [];
         wx.showLoading({
-          title: 'waiting...',
+          title: '加载中...',
         })
 
         // 从数据库获取结果

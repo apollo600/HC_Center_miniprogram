@@ -45,7 +45,7 @@ Page({
     console.time("首屏时间")
     let that = this;
     wx.showLoading({
-      title: '正在加载...',
+      title: '加载中...',
     })
     if (app.globalData['hasReload'] == false) {
         d_items = [];

@@ -1,53 +1,66 @@
+// pages/getMiniProgramCode/index.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    showUploadTip: false,
-    haveGetCodeSrc: false,
-    envId: '',
-    codeSrc: ''
-  },
+    /**
+     * 页面的初始数据
+     */
+    data: {
 
-  onLoad(options) {
-    this.setData({
-      envId: options.envId
-    });
-  },
+    },
 
-  getCodeSrc() {
-    wx.showLoading({
-      title: '',
-    });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: this.data.envId
-      },
-      data: {
-        type: 'getMiniProgramCode'
-      }
-    }).then((resp) => {
-      this.setData({
-        haveGetCodeSrc: true,
-        codeSrc: resp.result
-      });
-      wx.hideLoading();
-    }).catch((e) => {
-      console.log(e);
-      this.setData({
-        showUploadTip: true
-      });
-      wx.hideLoading();
-    });
-  },
+    /**
+     * 生命周期函数--监听页面加载
+     */
+    onLoad: function (options) {
 
-  clearCodeSrc() {
-    this.setData({
-      haveGetCodeSrc: false,
-      codeSrc: ''
-    });
-  }
+    },
 
-});
+    /**
+     * 生命周期函数--监听页面初次渲染完成
+     */
+    onReady: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面隐藏
+     */
+    onHide: function () {
+
+    },
+
+    /**
+     * 生命周期函数--监听页面卸载
+     */
+    onUnload: function () {
+
+    },
+
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function () {
+
+    },
+
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: function () {
+
+    },
+
+    /**
+     * 用户点击右上角分享
+     */
+    onShareAppMessage: function () {
+
+    }
+})

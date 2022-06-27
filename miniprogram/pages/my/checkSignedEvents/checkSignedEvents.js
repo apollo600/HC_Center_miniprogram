@@ -43,7 +43,7 @@ Page({
     onShow() {
         const that = this;
         wx.showLoading({
-            title: 'waiting...',
+            title: '加载中...',
         })     
         let d_items = [];
         let userItem;
@@ -147,7 +147,9 @@ Page({
             onSearch: false,
             searchContent: e.detail.value
         }, () => {
-            wx.showLoading();
+            wx.showLoading({
+                title:'加载中...'
+            });
             const that = this;
 
             // 使用正则进行模糊搜索
@@ -245,7 +247,9 @@ Page({
     },
 
     searchLeft() {
-        wx.showLoading();
+        wx.showLoading({
+            title:'加载中...'
+        });
         const that = this;
 
         // 使用正则进行模糊搜索

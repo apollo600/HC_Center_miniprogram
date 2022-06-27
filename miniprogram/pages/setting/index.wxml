@@ -1,3 +1,2 @@
-<view class="button">
-    <button open-type="openSetting" type="default">前往系统设置</button>
-</view>
+<!--pages/setting/index.wxml-->
+<text>pages/setting/index.wxml</text>
