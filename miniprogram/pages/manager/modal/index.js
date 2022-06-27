@@ -29,6 +29,7 @@ Page ({
         navBarHeight: app.globalData.navBarHeight,
         back: true,
         md_text: undefined,
+        members: []
     },
 
     onLoad(options) {
@@ -48,7 +49,8 @@ Page ({
             
             console.log("文件正文处理后:", md);
             that.setData({
-                md_text: md
+                md_text: md,
+                members: item.members
             })
         })
         .catch(err => {

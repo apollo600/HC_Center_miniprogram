@@ -15,8 +15,14 @@
 
     <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">
         <wemark md="{{md_text}}" highlight type="wemark"></wemark>
-        <!-- <loadmore loading="{{false}}" ></loadmore> -->
-        <!-- <button type="primary" bindtap="signClicked">参加报名</button> -->
+        <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot" aria-role="option">
+			<view class="weui-hidden_abs">已无更多数据</view>
+			<text class="weui-loadmore__tips"></text>
+		</view>
+        <view class="h2_title">已报名学生</view>
+        <view wx:for="{{members}}" class="members_container">
+            <view class="member">{{item}}</view>
+        </view>
     </view>
 </view>
 
