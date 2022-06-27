@@ -1,4 +1,10 @@
 <!-- index.wxml -->
+
+<view class="page">
+    
+</view>
+
+
 <view class="container" style="padding-top: {{navBarHeight}}px;">
     <nav mask="true">
         <!-- 返回键 -->
@@ -14,9 +20,45 @@
     </nav>
 
     <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">
-        <wemark md="{{md_text}}" highlight type="wemark"></wemark>
-        <!-- <loadmore loading="{{false}}" ></loadmore> -->
-        <!-- <button type="primary" bindtap="signClicked">参加报名</button> -->
+        <view class="page__bd">
+            <wux-tabs defaultCurrent="tab1" bindchange = "onChange">
+                <wux-tab key="tab1" title="活动详情"></wux-tab>
+                <wux-tab key="tab2" title="报名结果"></wux-tab>
+            </wux-tabs>
+        </view>
+        <block wx:if="{{current == 'tab1'}}">
+            <wemark md="{{md_text}}" highlight type="wemark"></wemark>
+            <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot" aria-role="option">
+                <view class="weui-hidden_abs">已无更多数据</view>
+                <text class="weui-loadmore__tips"></text>
+            </view>
+        </block>
+        
+        <block wx:if="{{current == 'tab2'}}">
+            <wux-virtual-list
+                id="wux-virtual-list"
+                enablePageScroll
+                height="{{ height }}"
+                itemHeight="100"
+                itemBuffer="30"
+                disableScroll="{{ disableScroll }}"
+                bind:change="onChange"
+            >
+                <wux-virtual-item>
+                    <view class="item">
+                        <view class="index">学号</view>
+                        <view class="desc">姓名</view>
+                    </view>
+                </wux-virtual-item>
+                <wux-virtual-item wx:for="{{ members }}" wx:key="item" style="min-height: 100rpx;">
+                    <view class="item">
+                        <view class="index">{{ item.account }}</view>
+                        <view class="desc">{{ item.name }}</view>
+                    </view>
+                </wux-virtual-item>
+            </wux-virtual-list>
+        </block>
     </view>
 </view>
+
 

@@ -76,8 +76,17 @@ Page ({
                 if (res.confirm) {
                     console.log('用户点击确认, account:', app.globalData.account);
                     console.log("更改前成员集合: ", item.members);
-                    if (!item.members.includes(app.globalData.account))
-                        item.members.push(app.globalData.account);
+                    let _push = true;
+                    item.members.forEach(element => {
+                        if (element.account === app.globalData.account) {
+                            _push = false;
+                        }
+                    });
+                    if (_push)
+                        item.members.push({
+                            "account": app.globalData.account,
+                            "name": app.globalData.name
+                        });
                     console.log("更改后成员集合:", item.members);
 
                     db.collection('eventInfo').where({

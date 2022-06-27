@@ -1,1 +1,34 @@
+@import "../../../wux-weapp/example/assets/styles/example.wxss";
 @import "../../index/index.wxss";
+
+.member_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.member {
+    width: 200rpx;
+    display: flex;
+}
+
+.item {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    min-height: 100rpx;
+    padding: 0 10px;
+    border-bottom: 1px dashed #cecece;
+}
+
+.index {
+    position: absolute;
+    left: 20%;
+    flex: 1;
+}
+
+.desc {
+    position: absolute;
+    left: 65%;
+    flex: 4;
+}

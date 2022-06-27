@@ -2,6 +2,7 @@ const util = require('../../utils/util.js')
 const app = getApp();
 const db = wx.cloud.database();
 var key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
+var rand_name = require('../../utils/rand_name.js')
 
 Page ({
     data: {
@@ -27,6 +28,9 @@ Page ({
             return;
         })
 
+        for (let i = 0; i < 50; i++) {
+            console.log("随机姓名", rand_name.getName());
+        }
     },
 
     logOut: function () {
