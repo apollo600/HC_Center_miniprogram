@@ -79,6 +79,16 @@ Page ({
                     if (!item.members.includes(app.globalData.account))
                         item.members.push(app.globalData.account);
                     console.log("更改后成员集合:", item.members);
+                    let events = db.collection('userInfo').where({
+                        id: app.globalData.account
+                    })
+                    db.collection('userInfo').where({
+                        id: app.globalData.account
+                    }).update({
+                        data: {
+                            signedUpEventsID: 
+                        }
+                    })
 
                     db.collection('eventInfo').where({
                         ID: _.eq(item.ID)

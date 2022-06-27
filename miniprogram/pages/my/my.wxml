@@ -33,6 +33,11 @@
         <text class="item-text">活动管理中心</text>
         <image class="image-jiantou" src="../../images/jiantou.svg"></image>
       </view>
+      <view class="check-SignedEvents" wx:if="{{identity=='学生'}}"catchtap="checkSignedEvents" hover-class="clicked">
+        <image class="item-image" src="../../images/checkSignedEvents.svg"></image>
+        <text class="item-text">查看已报名的活动</text>
+        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+      </view>
       <view class="clear-cache" catchtap="clearCache" hover-class="clicked">
         <image class="item-image" src="../../images/clearCache.svg"></image>
         <text class="item-text">清除缓存</text>

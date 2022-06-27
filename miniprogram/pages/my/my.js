@@ -3,6 +3,7 @@ const app = getApp();
 const db = wx.cloud.database();
 var key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
 
+
 Page ({
     data: {
         back: false,
@@ -39,6 +40,12 @@ Page ({
       postInfo:function(){
         wx.navigateTo({
           url: '../manager/manager',
+        })
+      },
+
+      checkSignedEvents:function(){
+        wx.navigateTo({
+          url: 'checkSignedEvents/checkSignedEvents',
         })
       },
 

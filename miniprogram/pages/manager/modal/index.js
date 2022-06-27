@@ -1,8 +1,6 @@
 const app = getApp();
 const fs = wx.getFileSystemManager();
 
-
-
 function dateFormat(fmt, date) {
     let ret;
     const opt = {
