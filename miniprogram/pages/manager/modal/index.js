@@ -27,6 +27,8 @@ Page ({
         navBarHeight: app.globalData.navBarHeight,
         back: true,
         md_text: undefined,
+        current: "tab1",
+        members: []
     },
 
     onLoad(options) {
@@ -46,7 +48,8 @@ Page ({
             
             console.log("文件正文处理后:", md);
             that.setData({
-                md_text: md
+                md_text: md,
+                members: item.members
             })
         })
         .catch(err => {
@@ -66,5 +69,12 @@ Page ({
           path: "pages/wjxqList/wjxqList?activityId=e4hxWyw"
         //   path: 'pages/show/show'
         })
-    }
+    },
+
+    onChange(e) {
+        console.log('onChange', e)
+        this.setData({
+            current: e.detail.key,
+        })
+    },
 })
