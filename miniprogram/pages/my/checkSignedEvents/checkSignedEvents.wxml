@@ -24,7 +24,7 @@
   </view>
 
     <view class="activity-container">
-        <view wx:if="{{items.length==0}}" class="weui-loadmore weui-loadmore_line">
+        <view wx:if="{{isEmpty}}" class="weui-loadmore weui-loadmore_line">
 			<text class="weui-loadmore__tips">暂无数据</text>
 		</view>
         <view wx:for="{{items}}" class="test" bindtap="openItem" data-reply="{{index}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">

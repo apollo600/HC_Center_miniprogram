@@ -36,7 +36,8 @@ Page({
         onEdit: false,
         items: [],
         searchContent: "",
-        showSearch: false
+        showSearch: false,
+        isEmpty: false
     },
 
     onShow() {
@@ -99,7 +100,8 @@ Page({
                     // 同步到globalData和data
                     app.globalData['d_items'] = d_items;
                     that.setData({
-                        items: d_items
+                        items: d_items,
+                        isEmpty: d_items.length==0
                     }, () => {
                         console.log("setData后的结果", that.data.items);
                         wx.hideLoading();

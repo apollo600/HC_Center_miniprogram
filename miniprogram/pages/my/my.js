@@ -30,11 +30,11 @@ Page ({
     },
 
     logOut: function () {
-        wx.clearStorageSync()
-        wx.navigateTo({
-          url: '../login/index/index',
-        })
-      },
+      wx.clearStorageSync()
+      wx.redirectTo({
+        url: '../login/index/index',
+      })
+    },
 
       postInfo:function(){
         wx.navigateTo({

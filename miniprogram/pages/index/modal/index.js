@@ -38,6 +38,9 @@ Page ({
         let md;
         let _index = options.index;
         item = app.globalData['d_items'][_index];
+        wx.showLoading({
+          title: '加载中...',
+        })
         let _contentID = item.contentID;
         console.log("File ID:", _contentID);
         wx.cloud.downloadFile({
@@ -50,6 +53,10 @@ Page ({
             console.log("文件正文处理后:", md);
             that.setData({
                 md_text: md
+            }, () => {
+                wx.hideLoading({
+                  success: (res) => {},
+                })
             })
         })
         .catch(err => {
