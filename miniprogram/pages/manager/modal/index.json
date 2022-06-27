@@ -2,7 +2,6 @@
   "usingComponents": {
       "wux-tabs": "../../../wux-weapp/example/dist/tabs/index",
       "wux-tab": "../../../wux-weapp/example/dist/tab/index",
-      "wux-virtual-list": "../../../wux-weapp/example/dist/virtual-list/index",
       "wux-virtual-item": "../../../wux-weapp/example/dist/virtual-item/index"
   }
 }
