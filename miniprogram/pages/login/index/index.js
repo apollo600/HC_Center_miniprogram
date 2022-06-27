@@ -5,6 +5,7 @@ const db = wx.cloud.database();
 const _ = db.command;
 const MAX_LIMIT = 20;
 const key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
+const rand_name = require('../../../utils/rand_name.js')
 
 // for(var i = 0; i < 7; i++){
 //     db.collection('eventInfo').where({}).update({
@@ -30,12 +31,12 @@ const key = "KUf4hM5rThssysJhcRFCfxLR8Imihjl0eMsyhh1M7Wk";
 //     })
 // }
 
-// for(var i = 10; i < 100; i++){
-//     db.collection('userInfo').add({
+// for(var i = 0; i < 100; i++){
+//     db.collection('userInfo').where({
+//         id:2020300000 + i
+//     }).update({
 //         data:{
-//             id: 2020300000 + i,
-//             password: util.AES_ECB_ENCRYPT('00'+ i.toString(),key),
-//             isTeacher: false
+//             name: rand_name.getName()
 //         },
 //         success: function(res){
 //             console.log(res)
