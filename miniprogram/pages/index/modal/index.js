@@ -131,10 +131,15 @@ Page ({
                                     icon: 'success'
                                 })
                                 wx.navigateBack({
-                                delta: 1,
+                                    delta: 1,
                                 })
                             })
                         })
+                        }else{
+                            wx.showToast({
+                              title: '不可重复报名！',
+                              icon: 'error'
+                            })
                         }
                     } else if (res.cancel) {
                         console.log('用户点击取消')

@@ -5,6 +5,7 @@ const MAX_LIMIT = 20;
 const processors = 10;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
+
 function dateFormat(fmt, date) {
     let ret;
     const opt = {
@@ -42,60 +43,72 @@ Page({
         const that = this;
         wx.showLoading({
             title: 'waiting...',
-        })
-        
+        })     
         let d_items = [];
-
-        db.collection('eventInfo')
-        .count()
-        .then(res => {
-            let total = res.total;
-            let limit = Math.ceil(total / processors);
-            limit = limit > MAX_LIMIT ? MAX_LIMIT : limit;
-            const batches = Math.ceil(total / limit);
-            let tasks = [];
-            console.log(`数据库大小为:${total}, 分${batches}次取出`);
-            for (let i = 0; i < batches; ++i) {
-                const promise = db.collection('eventInfo').skip(i*limit).limit(limit).get();
-                tasks.push(promise);
-            }
-            // 等待所有数据取完
-            Promise.all(tasks).then((values) => {
-                console.log("取出的所有结果:",values);
-                for (let i = 0; i < values.length; ++i) {
-                    d_items.push.apply(d_items, values[i].data);
-                    console.log("拼接后", d_items);
-                }
-                // 排序
-                d_items.sort(function(a, b) {
-                    return a.d < b.d ? 1 : -1;
-                })
-                console.log("主页面获取数据库结果:", d_items);
-        
-                // 按Date排序加月份信息
-                // 添加是否被选中键
-                console.log("排序后结果:",d_items);
-                for (let i = 0; i < d_items.length; ++i) {
-                    if (d_items[i].d.getDate() < 10) {
-                        d_items[i].short_date = months[d_items[i].d.getMonth()] + "   " + d_items[i].d.getDate();
-                    } else {
-                        d_items[i].short_date = months[d_items[i].d.getMonth()] + " " + d_items[i].d.getDate();
-                    }
-                    d_items[i].time = dateFormat("HH:MM", d_items[i].d);
-                    d_items[i].date = dateFormat("YY-mm-dd", d_items[i].d);
-                    d_items[i].isSelected = false;
-                }
-
-                // 同步到globalData和data
-                app.globalData['d_items'] = d_items;
-                that.setData({
-                    items: d_items
-                }, () => {
-                    console.log("setData后的结果", that.data.items);
-                    wx.hideLoading();
-                })
+        let userItem;
+        let ids = [];
+        db.collection('userInfo').where({
+            id: parseInt(app.globalData.account)
+        }).get().then(res => {
+            console.log(res);
+            console.log(res.data[0]);
+            userItem = res.data[0];
+            ids = userItem.signedUpEventsID; 
+            db.collection('eventInfo').where({
+                ID: _.in(ids)
             })
+            .count()
+            .then(res => {
+                let total = res.total;
+                let limit = Math.ceil(total / processors);
+                limit = limit > MAX_LIMIT ? MAX_LIMIT : limit;
+                const batches = Math.ceil(total / limit);
+                let tasks = [];
+                console.log(`数据库大小为:${total}, 分${batches}次取出`);
+                for (let i = 0; i < batches; ++i) {
+                    const promise = db.collection('eventInfo').skip(i*limit).limit(limit).get();
+                    tasks.push(promise);
+                }
+                // 等待所有数据取完
+                Promise.all(tasks).then((values) => {
+                    console.log("取出的所有结果:",values);
+                    for (let i = 0; i < values.length; ++i) {
+                        d_items.push.apply(d_items, values[i].data);
+                        console.log("拼接后", d_items);
+                    }
+                    // 排序
+                    d_items.sort(function(a, b) {
+                        return a.d < b.d ? 1 : -1;
+                    })
+                    console.log("主页面获取数据库结果:", d_items);
+            
+                    // 按Date排序加月份信息
+                    // 添加是否被选中键
+                    console.log("排序后结果:",d_items);
+                    for (let i = 0; i < d_items.length; ++i) {
+                        if (d_items[i].d.getDate() < 10) {
+                            d_items[i].short_date = months[d_items[i].d.getMonth()] + "   " + d_items[i].d.getDate();
+                        } else {
+                            d_items[i].short_date = months[d_items[i].d.getMonth()] + " " + d_items[i].d.getDate();
+                        }
+                        d_items[i].time = dateFormat("HH:MM", d_items[i].d);
+                        d_items[i].date = dateFormat("YY-mm-dd", d_items[i].d);
+                        d_items[i].isSelected = false;
+                    }
+    
+                    // 同步到globalData和data
+                    app.globalData['d_items'] = d_items;
+                    that.setData({
+                        items: d_items
+                    }, () => {
+                        console.log("setData后的结果", that.data.items);
+                        wx.hideLoading();
+                    })
+                })
+            })           
         })
+
+       
     },
     
     openItem(e) {
