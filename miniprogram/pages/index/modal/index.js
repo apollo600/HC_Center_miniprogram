@@ -1,5 +1,9 @@
 const app = getApp();
 const fs = wx.getFileSystemManager();
+const db = wx.cloud.database();
+const _ = db.command;
+
+let item;
 
 function dateFormat(fmt, date) {
     let ret;
@@ -33,7 +37,7 @@ Page ({
         const that = this;
         let md;
         let _index = options.index;
-        let item = app.globalData['d_items'][_index];
+        item = app.globalData['d_items'][_index];
         let _contentID = item.contentID;
         console.log("File ID:", _contentID);
         wx.cloud.downloadFile({
@@ -66,16 +70,35 @@ Page ({
         // //   path: 'pages/show/show'
         // })
         wx.showModal({
-            title: '提示',
+            title: '',
             content: '确定报名该活动吗？',
-            success (res){
+            success (res) {
                 if (res.confirm) {
-                    console.log('用户点击确认')
+                    console.log('用户点击确认, account:', app.globalData.account);
+                    console.log("更改前成员集合: ", item.members);
+                    if (!item.members.includes(app.globalData.account))
+                        item.members.push(app.globalData.account);
+                    console.log("更改后成员集合:", item.members);
 
-                    wx.showToast({
-                        title: '报名成功！',
-                        icon: 'success'
+                    db.collection('eventInfo').where({
+                        ID: _.eq(item.ID)
+                    }).update({
+                        data: {
+                            members: item.members
+                        }
                     })
+                    .then(res => {
+                        console.log(res)
+                        wx.showToast({
+                            title: '报名成功！',
+                            icon: 'success'
+                        })
+                        wx.navigateBack({
+                          delta: 1,
+                        })
+                    })
+
+                   
                 }else if (res.cancel) {
                     console.log('用户点击取消')
                 }

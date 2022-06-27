@@ -12,7 +12,8 @@ let item = {
     imageURL: "",
     contentID: "",
     ID: "",
-    releaseDate:""
+    releaseDate:"",
+    members: []
 };
 
 function dateFormat(fmt, date) {
@@ -195,7 +196,6 @@ Page ({
         //预处理数据，以及获取md文件链接
         that.data._date = that.data.date.split('-');
         that.data._time = that.data.time.split(':');
-        // fs.writeFileSync(`${wx.env.USER_DATA_PATH}/tmp.txt`, `# ${that.data.title}\n\n> 举办时间：${that.data._date[0]}-${that.data._date[1] - 1}-${that.data._date[2]} ${that.data._time[0]}:${that.data._time[1]}>发布时间：${dateFormat("YY-mm-dd HH:MM", new Date())}\n\n![title-image](${that.data.images[0]})\n\n${that.data.content}`, "utf-8");
         fs.writeFileSync(`${wx.env.USER_DATA_PATH}/tmp.txt`, `${that.data.content}`, "utf-8");
         wx.cloud.uploadFile({
             cloudPath: `${new Date().toISOString()}.txt`,
@@ -242,7 +242,8 @@ Page ({
                                     d: item.d,
                                     imageURL: item.imageURL,
                                     contentID: item.contentID,
-                                    releaseDate: item.releaseDate
+                                    releaseDate: item.releaseDate,
+                                    members: item.members
                                 },
                             })
                             .then(res => {
@@ -284,7 +285,8 @@ Page ({
                                 d: item.d,
                                 imageURL: item.imageURL,
                                 contentID: item.contentID,
-                                releaseDate: item.releaseDate
+                                releaseDate: item.releaseDate,
+                                members: item.members
                             },
                         })
                         .then(res => {
@@ -306,6 +308,7 @@ Page ({
         })
     },
 
+    // disabled | deprecated
     reload() {
         let d_items = [];
         let that = this;
