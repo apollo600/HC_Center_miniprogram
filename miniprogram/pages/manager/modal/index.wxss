@@ -1,13 +1,23 @@
+<<<<<<< HEAD
 @import "../../../wux-weapp/example/assets/styles/example.wxss";
 @import "../../index/index.wxss";
 
 .member_container {
     display: flex;
     flex-direction: column;
+=======
+@import "../../index/index.wxss";
+
+.members_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+>>>>>>> f40ac177326c149a07ebba61e48fa1168fe3ff88
     align-items: center;
 }
 
 .member {
+<<<<<<< HEAD
     width: 200rpx;
     display: flex;
 }
@@ -32,3 +42,22 @@
     left: 65%;
     flex: 4;
 }
+=======
+    width: 40%;
+    height: 50rpx;
+    /* background-color: aqua; */
+    display: inline-flex;
+    justify-content: center;
+}
+
+.h2_title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40rpx;
+    box-sizing: border-box;
+    font-size: 20pt;
+    font-weight: 600;
+    color: #3e5064;
+}
+>>>>>>> f40ac177326c149a07ebba61e48fa1168fe3ff88
