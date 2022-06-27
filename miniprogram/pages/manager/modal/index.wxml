@@ -20,7 +20,6 @@
     </nav>
 
     <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">
-<<<<<<< HEAD
         <view class="page__bd">
             <wux-tabs defaultCurrent="tab1" bindchange = "onChange">
                 <wux-tab key="tab1" title="活动详情"></wux-tab>
@@ -59,17 +58,6 @@
                 </wux-virtual-item>
             </wux-virtual-list>
         </block>
-=======
-        <wemark md="{{md_text}}" highlight type="wemark"></wemark>
-        <view class="weui-loadmore weui-loadmore_line weui-loadmore_dot" aria-role="option">
-			<view class="weui-hidden_abs">已无更多数据</view>
-			<text class="weui-loadmore__tips"></text>
-		</view>
-        <view class="h2_title">已报名学生</view>
-        <view wx:for="{{members}}" class="members_container">
-            <view class="member">{{item}}</view>
-        </view>
->>>>>>> f40ac177326c149a07ebba61e48fa1168fe3ff88
     </view>
 </view>
 

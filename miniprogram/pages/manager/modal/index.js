@@ -29,10 +29,7 @@ Page ({
         navBarHeight: app.globalData.navBarHeight,
         back: true,
         md_text: undefined,
-<<<<<<< HEAD
         current: "tab1",
-=======
->>>>>>> f40ac177326c149a07ebba61e48fa1168fe3ff88
         members: []
     },
 
