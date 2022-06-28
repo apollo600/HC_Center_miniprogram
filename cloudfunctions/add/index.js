@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
     console.log("tdata", tdata);
 
     try {
-        return await db.collection(tname).where(tcondition).add({
+        return await db.collection(tname).add({
             data: tdata
         })
     }

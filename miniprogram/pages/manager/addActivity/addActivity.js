@@ -237,24 +237,33 @@ Page ({
                     console.log("当前id数据库中数量",total);
                     if (total != 0) {
                         console.log("将进行数据库更新");
-                        db.collection('eventInfo').where({
-                            ID: _.eq(item.ID)
+                        wx.cloud.callFunction({
+                            name: "delete",
+                            data: {
+                                collection_name: "eventInfo",
+                                condition: {
+                                    ID: item.ID
+                                }
+                            }
                         })
-                        .remove()
                         .then(res => {
                             console.log("从数据库删除",res);
-                            db.collection('eventInfo')
-                            .add({
+                            wx.cloud.callFunction({
+                                name: "add",
                                 data: {
-                                    ID: item.ID,
-                                    title: item.title,
-                                    type: item.type,
-                                    d: item.d,
-                                    imageURL: item.imageURL,
-                                    contentID: item.contentID,
-                                    releaseDate: item.releaseDate,
-                                    members: item.members
-                                },
+                                    collection_name: "eventInfo",
+                                    udata: {
+                                        ID: item.ID,
+                                        title: item.title,
+                                        type: item.type,
+                                        d: item.d,
+                                        imageURL: item.imageURL,
+                                        contentID: item.contentID,
+                                        releaseDate: item.releaseDate,
+                                        members: item.members
+                                    }
+                                }
+                            })
                             })
                             .then(res => {
                                 console.log("向数据库添加",res);
@@ -265,10 +274,7 @@ Page ({
                                 wx.navigateBack({
                                     delta: 1,
                                 })
-                            })
-                        })
-                        
-                            
+                            })                           
                     }
                     else {
                         // for (let i = 0; i < 188; ++i) {
@@ -287,17 +293,21 @@ Page ({
                         //     })
                         // }
                         console.log("数据不存在，添加活动");
-                        db.collection('eventInfo').add({
+                        wx.cloud.callFunction({
+                            name: "add",
                             data: {
-                                ID: item.ID,
-                                title: item.title,
-                                type: item.type,
-                                d: item.d,
-                                imageURL: item.imageURL,
-                                contentID: item.contentID,
-                                releaseDate: item.releaseDate,
-                                members: item.members
-                            },
+                                collection_name: "eventInfo",
+                                udata: {
+                                    ID: item.ID,
+                                    title: item.title,
+                                    type: item.type,
+                                    d: item.d,
+                                    imageURL: item.imageURL,
+                                    contentID: item.contentID,
+                                    releaseDate: item.releaseDate,
+                                    members: item.members
+                                }
+                            }
                         })
                         .then(res => {
                             console.log(res);

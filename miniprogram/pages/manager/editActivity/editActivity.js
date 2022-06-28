@@ -291,21 +291,30 @@ Page ({
             console.log("存储至item完成:",item);
         }).then(()=>{
             // 存入数据库
-            db.collection('eventInfo').where({
-                ID: _.eq(old_id)
+            wx.cloud.callFunction({
+                name: "delete",
+                data:{
+                    collection_name: "eventInfo",
+                    condition:{
+                        ID: old_id
+                    }
+                }
             })
-            .remove()
             .then(res => {
                 console.log("从数据库删除",res);
-                db.collection('eventInfo').add({
+                wx.cloud.callFunction({
+                    name: "add",
                     data: {
-                        ID: item.ID,
-                        title: item.title,
-                        type: item.type,
-                        d: item.d,
-                        imageURL: item.imageURL,
-                        contentID: item.contentID,
-                        releaseDate:item.releaseDate
+                        collection_name: "eventInfo",
+                        udata:{
+                            ID: item.ID,
+                            title: item.title,
+                            type: item.type,
+                            d: item.d,
+                            imageURL: item.imageURL,
+                            contentID: item.contentID,
+                            releaseDate:item.releaseDate
+                        }
                     }
                 })
                 .then(res => {
