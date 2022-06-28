@@ -142,8 +142,7 @@ Page ({
                                                 }
                                             },
                                             success: function(res) {
-                                                console.log("==更改活动members成功==", res)
-                                                console.log(typeof(dateFormat("YY-mm-dd HH:MM", item.d)));
+                                                console.log("==更改活动members成功==", res);
                                                 wx.cloud.callFunction({
                                                     name: "send_message",
                                                     data: {

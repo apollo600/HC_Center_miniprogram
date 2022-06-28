@@ -9,7 +9,9 @@ exports.main = async (event, context) => {
     const wxContext = cloud.getWXContext()
 
     const tname = event.collection_name;
-    const tdata = event.udata;
+    let tdata = event.udata;
+    tdata.d = new Date(tdata.d);
+    tdata.releaseDate = new Date(tdata.releaseDate);
 
     console.log("name", tname);
     console.log("tdata", tdata);
