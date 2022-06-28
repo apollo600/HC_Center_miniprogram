@@ -78,8 +78,8 @@ Page ({
         // })
         if (app.globalData.isTeacher) {
             wx.showModal({
-            content: "老师无需报名活动~",
-            showCancel: false
+                content: "老师无需报名活动~",
+                showCancel: false
             },
             () => {
                 return;
@@ -143,6 +143,31 @@ Page ({
                                             },
                                             success: function(res) {
                                                 console.log("==更改活动members成功==", res)
+                                                console.log(typeof(dateFormat("YY-mm-dd HH:MM", item.d)));
+                                                wx.cloud.callFunction({
+                                                    name: "send_message",
+                                                    data: {
+                                                        data: {
+                                                            "thing2": {
+                                                                "value": item.title
+                                                            },
+                                                            "thing1": {
+                                                                "value": "活动报名成功"
+                                                            },
+                                                            "date3": {
+                                                                "value": dateFormat("YY-mm-dd HH:MM", item.d)
+                                                            }
+                                                        },
+                                                        page: "/pages/my/checkSignedEvents/checkSignedEvents",
+                                                        templateId: app.globalData.notifications_ID['活动状态变更通知']
+                                                    },
+                                                    success: function(res) {
+                                                        console.log("==消息通知成功==", res);
+                                                    },
+                                                    fail: function(err) {
+                                                        console.log("==消息推送错误==", err);
+                                                    }
+                                                })
                                                 wx.showToast({
                                                     title: '报名成功！',
                                                     icon: 'success'
