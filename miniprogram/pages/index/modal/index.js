@@ -117,35 +117,51 @@ Page ({
                                 eventIDs = userItem.signedUpEventsID;
                                 console.log(item);
                                 eventIDs.push(item.ID);
-                                db.collection('userInfo').where({
-                                    id: parseInt(app.globalData.account)
-                                }).update({
+                                wx.cloud.callFunction({
+                                    name: "update",
                                     data: {
-                                        signedUpEventsID: eventIDs
+                                        collection_name: "userInfo",
+                                        condition: {
+                                            id: parseInt(app.globalData.account)
+                                        },
+                                        udata: {
+                                            signedUpEventsID: eventIDs
+                                        },
+                                    },
+                                    success: function(res) {
+                                        console.log("==更改个人信息成功==", res);
+                                        wx.cloud.callFunction({
+                                            name: "update",
+                                            data: {
+                                                collection_name: "eventInfo",
+                                                condition: {
+                                                    ID: item.ID
+                                                },
+                                                udata: {
+                                                    members: item.members
+                                                }
+                                            },
+                                            success: function(res) {
+                                                console.log("==更改活动members成功==", res)
+                                                wx.showToast({
+                                                    title: '报名成功！',
+                                                    icon: 'success'
+                                                })
+                                                wx.navigateBack({
+                                                    delta: 1,
+                                                })
+                                            },
+                                            error: function(err) {
+                                                console.log("==更改活动信息失败==", err);
+                                            }
+                                        })
+                                    },
+                                    error: function(err) {
+                                        console.log("==更改个人信息失败==", err);
                                     }
                                 })
-                                .then(()=>{
-                                    db.collection('eventInfo').where({
-                                        ID: _.eq(item.ID)
-                                    }).update({
-                                        data: {
-                                            members: item.members
-                                        }
-                                    })
-                                    .then(res => {
-                                        console.log(res)
-                                        wx.showToast({
-                                            title: '报名成功！',
-                                            icon: 'success'
-                                        })
-                                        wx.navigateBack({
-                                            delta: 1,
-                                        })
-                                    })
-                                })
                             })
-                            
-                        }else{
+                        } else{
                             wx.showToast({
                               title: '不可重复报名！',
                               icon: 'error'
