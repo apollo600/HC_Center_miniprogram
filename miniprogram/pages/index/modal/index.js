@@ -99,7 +99,7 @@ Page ({
                                 _push = false;
                             }
                         });
-                        if (_push){
+                        if (_push) {
                             item.members.push({
                                 "account": app.globalData.account,
                                 "name": app.globalData.name
@@ -134,6 +134,7 @@ Page ({
                                     })
                                     .then(res => {
                                         console.log(res)
+                                        app.globalData.d_items.members = item.members;
                                         wx.showToast({
                                             title: '报名成功！',
                                             icon: 'success'
@@ -145,7 +146,7 @@ Page ({
                                 })
                             })
                             
-                        }else{
+                        } else{
                             wx.showToast({
                               title: '不可重复报名！',
                               icon: 'error'

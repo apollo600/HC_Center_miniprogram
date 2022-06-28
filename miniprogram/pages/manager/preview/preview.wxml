@@ -2,7 +2,7 @@
     <nav mask="true">
         <!-- 返回键 -->
         <block wx:if="{{back}}">
-            <image src="/images/arrow.svg" class="back-button" bindtap="back"></image>
+            <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=8cda4308ea303a527199f522a9b16a70&t=1656397789" class="back-button" bindtap="back"></image>
             <text style='display:inline-block;width:8px' bindtap="back"></text>
         </block>
         <block wx:else="{{back}}">

@@ -119,7 +119,7 @@ Page({
         if (!(that.data.onDelete || that.data.onEdit)) {
             console.log("跳转到",_index,"值为:",that.data.items[_index],"内容ID:",that.data.items[_index].contentID);
             wx.navigateTo({
-                url: `modal/index?index=${_index}`,
+                url: `../../index/modal/index?index=${_index}`,
             })
         }
     },

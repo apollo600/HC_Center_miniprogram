@@ -3,7 +3,7 @@
     <!-- 返回键 -->
     <view>
       <block wx:if="{{back}}">
-        <image src="../../images/arrow.svg" class="back-button" bindtap="back"></image>
+        <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=8cda4308ea303a527199f522a9b16a70&t=1656397789" class="back-button" bindtap="back"></image>
         <text style='display:inline-block;width:8px' bindtap="back"></text>
       </block>
       <block wx:else="{{back}}">
@@ -19,18 +19,18 @@
         <view wx:if="{{onSearch}}" class="bg" style="filter:opacity(90%);"></view>
         <view wx:else="{{onSearch}}" class="bg" style="filter:opacity(60%);"></view>
         <input type="text" value="{{searchContent}}" bindfocus="searchClicked" bindblur="searchCompleted" bindconfirm="searchCompleted_Left"/>
-        <image src="../../images/search.svg" bindtap="searchLeft"></image>
+        <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/search.svg?sign=0b2872989951bb2630c64cad71dccc43&t=1656397302" bindtap="searchLeft"></image>
     </view>
     <view class="icon_field" hover-class="icon-clicked" hover-start-time="50" hover-stay-time="200" bindtap="add_clicked">
-        <image class="icon" src="../../images/add_bold.svg"></image>
+        <image class="icon" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/add_bold.svg?sign=0625a1963039354ef2d1559a4c4f97cf&t=1656398111"></image>
     </view>
     <view class="icon_field" hover-class="icon-clicked" hover-start-time="200" hover-stay-time="50" bindtap="delete_clicked">
-        <image wx:if="{{!onDelete}}" class="icon" src="../../images/minus_bold.svg"></image>
-        <image wx:if="{{onDelete}}" class="onDelete" src="../../images/rubbish_bin.svg"></image>
+        <image wx:if="{{!onDelete}}" class="icon" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/minus_bold.svg?sign=68f3811dfb52e5076eee6fd2888add02&t=1656397456"></image>
+        <image wx:if="{{onDelete}}" class="onDelete" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/rubbish_bin.svg?sign=39b7e35ccacf9a0d63cc5e645a9f523a&t=1656397362"></image>
     </view>
     <view class="icon_field" hover-class="icon-clicked" hover-start-time="50" hover-stay-time="200" bindtap="edit_clicked">
-        <image wx:if="{{!onEdit}}" class="icon" src="../../images/edit-fill.svg"></image>
-        <image wx:if="{{onEdit}}" class="onEdit" src="../../images/edit-fill.svg"></image>
+        <image wx:if="{{!onEdit}}" class="icon" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/edit-fill.svg?sign=9ea483a2cee46276ceaf4e84877fe649&t=1656397612"></image>
+        <image wx:if="{{onEdit}}" class="onEdit" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/edit-fill.svg?sign=9ea483a2cee46276ceaf4e84877fe649&t=1656397612"></image>
     </view>
   </view>
 
@@ -44,7 +44,7 @@
                 <image src="{{item.imageURL}}" class="picture" mode="aspectFill" ></image>
                 <view class="title">{{item.title}}</view>
                 <view class="bottom-container">
-                    <image class="icon" src="../../images/people.svg" ></image>
+                    <image class="icon" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/people.svg?sign=03ecd7cf3b1c783dc077dec17aef7bc6&t=1656397428" ></image>
                     <view class="type">{{item.type}}</view>
                     <view class="middle">·</view>
                     <view class="time">{{item.date}}</view>

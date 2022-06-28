@@ -36,6 +36,7 @@ function dateFormat(fmt, date) {
     return fmt;
 }
 
+
 Page ({
     data: {
         themeColor: app.globalData.themeColor,
@@ -53,7 +54,16 @@ Page ({
         onUpload: false,
         contentID: "",
         content: "",
-        releaseDate:""
+        releaseDate:"",
+        number: 0,//已输入字数
+    },
+
+    inputText: function(e){
+        let value = e.detail.value;//获取textarea的内容
+        let len = value.length;
+        this.setData({
+            'number': len
+        })
     },
 
     onShow() {

@@ -5,7 +5,7 @@
             <!-- 返回键 -->
             <view>
                 <block wx:if="{{back}}">
-                    <image src="../../images/arrow.svg" class="back-button" bindtap="back"></image>
+                    <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=8cda4308ea303a527199f522a9b16a70&t=1656397789" class="back-button" bindtap="back"></image>
                     <text style='display:inline-block;width:8px' bindtap="back"></text>
                 </block>
                 <block wx:else="{{back}}">
@@ -29,24 +29,24 @@
     
     <view class="function">
       <view class="clear-cache" wx:if="{{identity=='老师'}}" bindtap="postInfo" hover-class="clicked">
-        <image class="item-image" src="../../images/post.svg"></image>
+        <image class="item-image" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/post.svg?sign=ba3d5c43adc0125084b2463968b51ad1&t=1656397409"></image>
         <text class="item-text">活动管理中心</text>
-        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+        <image class="image-jiantou" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/jiantou.svg?sign=f64405cd22d56d21967456078fa76560&t=1656398127"></image>
       </view>
       <view class="check-SignedEvents" wx:if="{{identity=='学生'}}"catchtap="checkSignedEvents" hover-class="clicked">
-        <image class="item-image" src="../../images/checkSignedEvents.svg"></image>
+        <image class="item-image" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/checkSignedEvents.svg?sign=fb40e49d49d2c23c588088d337fd01dc&t=1656397699"></image>
         <text class="item-text">查看已报名的活动</text>
-        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+        <image class="image-jiantou" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/jiantou.svg?sign=df274ecdf85549107c4f6ad06d092f35&t=1656397542"></image>
       </view>
       <view class="clear-cache" catchtap="clearCache" hover-class="clicked">
-        <image class="item-image" src="../../images/clearCache.svg"></image>
+        <image class="item-image" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/clearCache.svg?sign=7bbf1d24bf6834572004989f55063465&t=1656397678"></image>
         <text class="item-text">清除缓存</text>
-        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+        <image class="image-jiantou" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/jiantou.svg?sign=df274ecdf85549107c4f6ad06d092f35&t=1656397542"></image>
       </view>   
       <view class="change-password" catchtap="changePwd" hover-class="clicked">
-        <image class="item-image" src="../../images/changePwd.svg" style="transform: scale(1.2, 1.2); "></image>
+        <image class="item-image" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/changePwd.svg?sign=96ff50eb2930043571e7cdc9aa71440b&t=1656397726" style="transform: scale(1.2, 1.2); "></image>
         <text class="item-text">更改密码</text>
-        <image class="image-jiantou" src="../../images/jiantou.svg"></image>
+        <image class="image-jiantou" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/jiantou.svg?sign=df274ecdf85549107c4f6ad06d092f35&t=1656397542"></image>
       </view>
       <view class="log">
         
