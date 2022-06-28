@@ -27,7 +27,7 @@
             </view>
         </view>
         <view class="login">
-            <button type="default" disabled="{{loginDisabled}}" hover-class="button-hover" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+            <button type="default" disabled="{{loginDisabled}}" hover-class="button-hover" open-type="getUserInfo" bindtap="getUserInfo">登录</button>
         </view>
         <!-- <view class="toolbar">
             <view class="help2" bindtap="showHelp">

@@ -98,77 +98,102 @@ Page({
     getUserInfo: function(e) {
         let that = this;
         let _res = [];
-        wx.showLoading({
-          title: '加载中...',
-        })
 
-        // 从数据库获取结果
-        db.collection('userInfo').count().then(res => {
-            let total = res.total;
-            const batches = Math.ceil(total / MAX_LIMIT);
-            let tasks = [];
-            console.log(`数据库大小为:${total}, 分${batches}次取出`);
-            for (let i = 0; i < batches; ++i) {
-                const promise = db.collection('userInfo').skip(i*MAX_LIMIT).limit(MAX_LIMIT).get();
-                tasks.push(promise);
+        // 获取消息通知权限
+        wx.requestSubscribeMessage({
+            tmplIds: [app.globalData.notifications_ID["最新活动通知"],
+            app.globalData.notifications_ID["活动状态变更通知"]],
+            success: function(res) {
+                console.log("授权接口调用", res);
+
+                wx.showLoading({
+                    title: '加载中...',
+                  })
+          
+                  // 从数据库获取结果
+                  db.collection('userInfo').count().then(res => {
+                      let total = res.total;
+                      const batches = Math.ceil(total / MAX_LIMIT);
+                      let tasks = [];
+                      console.log(`数据库大小为:${total}, 分${batches}次取出`);
+                      for (let i = 0; i < batches; ++i) {
+                          const promise = db.collection('userInfo').skip(i*MAX_LIMIT).limit(MAX_LIMIT).get();
+                          tasks.push(promise);
+                      }
+                      // 等待所有数据取完
+                      Promise.all(tasks).then((values) => {
+                          console.log("取出的所有结果:",values);
+                          // 赋给res
+                          for (let i = 0; i < values.length; ++i) {
+                              _res.push.apply(_res, values[i].data);
+                          }
+                          console.log("获取到结果:", _res);
+          
+                          // 原处理部分
+                          var flag = 0;
+                          console.log("数据库大小"+_res.length)
+                          for(var i = 0; i < _res.length; i++){
+                              if(that.data.account == _res[i].id) {
+                                  flag = 1;
+                                   
+                                  // console.log(typeof(util.AES_ECB_DECRYPT(_res[i].password, key)))
+                                  wx.setStorageSync('password', util.AES_ECB_DECRYPT(_res[i].password, key));
+                                  app.globalData['password'] = util.AES_ECB_DECRYPT(_res[i].password, key);
+                                  console.log("存储全局变量password",app.globalData['password']);  
+                                  console.log("密码：",util.AES_ECB_DECRYPT(_res[i].password, key));
+                                  if(util.AES_ECB_DECRYPT(_res[i].password, key) == that.data.inputPassword){
+                                      console.log("用户信息", _res[i]);
+                                      wx.setStorageSync('account', that.data.account);
+                                      wx.setStorageSync('isTeacher', _res[i].isTeacher);  
+                                      wx.setStorageSync('name', _res[i].name);
+                                      app.globalData.account = that.data.account;
+                                      app.globalData.isTeacher = _res[i].isTeacher;
+                                      app.globalData.loggedIn = true;
+                                      app.globalData.name = _res[i].name;
+                                      
+                                      wx.showToast({
+                                        title: '登录成功',
+                                        icon:'su'
+                                    })
+                                    wx.hideLoading();
+                                    that.loginTouched();
+                                  } 
+                                  else{
+                                      wx.showToast({
+                                          title: '密码错误',
+                                          icon:"error"
+                                      })
+                                      break;
+                                  }
+                              }
+                              else {
+                                  console.log("no");
+                                  continue;
+                              }
+                          }
+                          if(flag == 0) {
+                              wx.showToast({
+                                  title: '账号不存在',
+                                  icon:'error'
+                              })
+                          }
+                      })
+                  })
+            },
+            fail: function(err) {
+                console.log("授权接口调用", err);
+                wx.hideLoading();
+                wx.showModal({
+                  content: "授权消息通知权限失败，如需更改请重新登录",
+                  confirmText: "重新登录",
+                  showCancel: false,
+                  success: function() {
+                        wx.redirectTo({
+                          url: './index',
+                        })
+                    }
+                })
             }
-            // 等待所有数据取完
-            Promise.all(tasks).then((values) => {
-                console.log("取出的所有结果:",values);
-                // 赋给res
-                for (let i = 0; i < values.length; ++i) {
-                    _res.push.apply(_res, values[i].data);
-                }
-                console.log("获取到结果:", _res);
-
-                // 原处理部分
-                var flag = 0;
-                console.log("数据库大小"+_res.length)
-                for(var i = 0; i < _res.length; i++){
-                    if(that.data.account == _res[i].id) {
-                        flag = 1;
-                         
-                        // console.log(typeof(util.AES_ECB_DECRYPT(_res[i].password, key)))
-                        wx.setStorageSync('password', util.AES_ECB_DECRYPT(_res[i].password, key));
-                        app.globalData['password'] = util.AES_ECB_DECRYPT(_res[i].password, key);
-                        console.log("存储全局变量password",app.globalData['password']);  
-                        console.log("密码：",util.AES_ECB_DECRYPT(_res[i].password, key));
-                        if(util.AES_ECB_DECRYPT(_res[i].password, key) == that.data.inputPassword){
-                            console.log("用户信息", _res[i]);
-                            wx.setStorageSync('account', that.data.account);
-                            wx.setStorageSync('isTeacher', _res[i].isTeacher);  
-                            wx.setStorageSync('name', _res[i].name);
-                            app.globalData.account = that.data.account;
-                            app.globalData.isTeacher = _res[i].isTeacher;
-                            app.globalData.loggedIn = true;
-                            app.globalData.name = _res[i].name;
-                            wx.showToast({
-                                title: '登录成功',
-                                icon:'su'
-                            })
-                            wx.hideLoading();
-                            that.loginTouched();
-                        } 
-                        else{
-                            wx.showToast({
-                                title: '密码错误',
-                                icon:"error"
-                            })
-                            break;
-                        }
-                    }
-                    else {
-                        console.log("no");
-                        continue;
-                    }
-                }
-                if(flag == 0) {
-                    wx.showToast({
-                        title: '账号不存在',
-                        icon:'error'
-                    })
-                }
-            })
         })
     },
 

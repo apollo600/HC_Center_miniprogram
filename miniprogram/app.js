@@ -29,7 +29,11 @@ App({
       userInfo: undefined,
       d_items: [],
       hasReload: false, // 只用于告诉主页面需不需要重新加载,
-      name: undefined
+      name: undefined,
+      notifications_ID: {
+        "最新活动通知": "vTMO40t00BDUc9Y-y98Haiz84qmQLzoVUhjBDEFDasM",
+        "活动状态变更通知": "Ggjqn53ogshdNZREtYicZlaTM9TNwDSCu1IhoiTnvkU"
+    }
     }
 
     this.setNavBarInfo().then(
