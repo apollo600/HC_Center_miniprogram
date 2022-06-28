@@ -12,6 +12,7 @@ exports.main = async (event, context) => {
     let tdata = event.udata;
     tdata.d = new Date(tdata.d);
     tdata.releaseDate = new Date(tdata.releaseDate);
+    tdata.members = [];
 
     console.log("name", tname);
     console.log("tdata", tdata);

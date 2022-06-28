@@ -35,7 +35,7 @@
   </view>
 
     <view class="activity-container">
-        <view wx:for="{{items}}" class="test" bindtap="openItem" data-reply="{{index}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
+        <view wx:for="{{items}}" class="test" bindtap="openItem" data-ID="{{item.ID}}" data-index="{{index}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
             <block>
                 <view class="{{(onEdit || onDelete) && item.isSelected ? 'flow' : ''}}"></view>
                 <view class="{{(onEdit || onDelete) && !item.isSelected ? 'mask' : ''}}"></view>

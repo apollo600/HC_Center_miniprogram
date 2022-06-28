@@ -5,8 +5,6 @@ const MAX_LIMIT = 20;
 const processors = 10;
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-
-
 function dateFormat(fmt, date) {
     let ret;
     const opt = {
@@ -45,7 +43,7 @@ Page({
         wx.showLoading({
             title:'加载中...'
         })
-        
+
         let d_items = [];
 
         db.collection('eventInfo')
@@ -102,9 +100,17 @@ Page({
 
     openItem(e) {
         const that = this;
-        let _index = e.currentTarget.dataset.reply;
+        let _ID = e.currentTarget.dataset.id;
+        let _index = e.currentTarget.dataset.index;
+        let d_items = app.globalData.d_items;
         if (!(that.data.onDelete || that.data.onEdit)) {
-            console.log("跳转到",_index,"值为:",that.data.items[_index],"内容ID:",that.data.items[_index].contentID);
+            for (let i = 0; i < d_items.length; i++) {
+                if (d_items[i].ID == _ID) {
+                    _index = i;
+                    break;
+                }
+            }
+            console.log("跳转到",_index,"值为:",d_items[_index],"内容ID:",d_items[_index].contentID);
             wx.navigateTo({
                 url: `modal/index?index=${_index}`,
             })
@@ -230,13 +236,14 @@ Page({
                     }
                     else {
                         // 同步到data
-                        setTimeout(function() {
-                            that.setData({
-                                items: t_items,
-                                showSearch: true
-                            })
-                        }, 1000)
-                        console.log("搜索数据已同步",t_items);
+                        that.setData({
+                            items: t_items,
+                            showSearch: true,
+                            success: function(res) {
+                                console.log("搜索数据已同步到data", res);
+                            }
+                        })
+                        
                     }
                 })
             })
@@ -399,6 +406,7 @@ Page({
                                 },
                                 success: function(res) {
                                     console.log("==从数据库删除==", res);
+                                    that.onShow();
                                     // 从每个报名的学生中删除这一项
                                 },
                                 error: function(err) {

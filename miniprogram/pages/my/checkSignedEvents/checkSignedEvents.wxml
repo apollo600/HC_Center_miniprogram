@@ -27,7 +27,7 @@
         <view wx:if="{{isEmpty}}" class="weui-loadmore weui-loadmore_line">
 			<text class="weui-loadmore__tips">暂无数据</text>
 		</view>
-        <view wx:for="{{items}}" class="test" bindtap="openItem" data-reply="{{index}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
+        <view wx:for="{{items}}" class="test" bindtap="openItem" data-ID="{{item.ID}}" hover-class="activity-clicked" hover-start-time="50" hover-stay-time="200">
             <view class="activity">
                 <image src="{{item.imageURL}}" class="picture" mode="aspectFill" ></image>
                 <view class="title">{{item.title}}</view>
