@@ -99,7 +99,7 @@ Page ({
                                 _push = false;
                             }
                         });
-                        if (_push){
+                        if (_push) {
                             item.members.push({
                                 "account": app.globalData.account,
                                 "name": app.globalData.name

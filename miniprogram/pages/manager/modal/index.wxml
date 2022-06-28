@@ -9,14 +9,14 @@
     <nav mask="true">
         <!-- 返回键 -->
         <block wx:if="{{back}}">
-            <image src="/images/arrow.svg" class="back-button" bindtap="back"></image>
+            <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=92e94719e57b01084f4d505ca2049848&t=1656397933" class="back-button" bindtap="back"></image>
             <text style='display:inline-block;width:8px' bindtap="back"></text>
         </block>
         <block wx:else="{{back}}">
             <text style='display:inline-block;width:10px'></text>
         </block>
 
-        HC活动中心
+        活动详情
     </nav>
 
     <view class="activity-container" style="padding-left: 20rpx; padding-right: 20rpx; padding-bottom: 50rpx;">

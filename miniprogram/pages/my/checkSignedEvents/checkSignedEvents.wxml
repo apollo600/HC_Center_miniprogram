@@ -3,7 +3,7 @@
     <!-- 返回键 -->
     <view>
       <block wx:if="{{back}}">
-        <image src="../../../images/arrow.svg" class="back-button" bindtap="back"></image>
+        <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=92e94719e57b01084f4d505ca2049848&t=1656397933" class="back-button" bindtap="back"></image>
         <text style='display:inline-block;width:8px' bindtap="back"></text>
       </block>
       <block wx:else="{{back}}">
@@ -19,7 +19,7 @@
         <view wx:if="{{onSearch}}" class="bg" style="filter:opacity(90%);"></view>
         <view wx:else="{{onSearch}}" class="bg" style="filter:opacity(60%);"></view>
         <input type="text" value="{{searchContent}}" bindfocus="searchClicked" bindblur="searchCompleted" bindconfirm="searchCompleted_Left"/>
-        <image src="../../../images/search.svg" bindtap="searchLeft"></image>
+        <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/search.svg?sign=0b2872989951bb2630c64cad71dccc43&t=1656397302" bindtap="searchLeft"></image>
     </view>
   </view>
 
@@ -32,7 +32,7 @@
                 <image src="{{item.imageURL}}" class="picture" mode="aspectFill" ></image>
                 <view class="title">{{item.title}}</view>
                 <view class="bottom-container">
-                    <image class="icon" src="../../../images/people.svg" ></image>
+                    <image class="icon" src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/people.svg?sign=03ecd7cf3b1c783dc077dec17aef7bc6&t=1656397428" ></image>
                     <view class="type">{{item.type}}</view>
                     <view class="middle">·</view>
                     <view class="time">{{item.date}}</view>

@@ -53,10 +53,17 @@ Page ({
         onUpload: false,
         contentID: "",
         content: "",
-        releaseDate:""
-        
+        releaseDate:"",
+        number: 0,//已输入字数
     },
 
+    inputText: function(e){
+        let value = e.detail.value;//获取textarea的内容
+        let len = value.length;
+        this.setData({
+            'number': len
+        })
+    },
     onLoad(options) {
         const that = this;
         let _index = options.index;
@@ -93,6 +100,7 @@ Page ({
         })
         .then(() => {
             wx.setStorageSync('content', _content);
+            wx.setStorageSync('number', _content.length);
             //关闭Loading
             that.setData({
                 title: _title,
@@ -101,7 +109,8 @@ Page ({
                 time: _time,
                 images: [_imageURL],
                 content: _content,
-                releaseDate:_releaseDate
+                releaseDate:_releaseDate,
+                number: _content.length
             })
             wx.hideLoading();
         })
@@ -118,7 +127,8 @@ Page ({
             time: wx.getStorageSync('time'),
             images: wx.getStorageSync('images'),
             content: wx.getStorageSync('content'),
-            releaseDate:wx.getStorageInfoSync('releaseDate')
+            releaseDate:wx.getStorageInfoSync('releaseDate'),
+            number: wx.getStorageSync('number')
         },() => {
             console.log("缓存恢复数据完毕",this.data);
         })
@@ -126,7 +136,7 @@ Page ({
     },
 
     onUnload() {
-        let _clr = ['title', 'typeIndex', 'date', 'time', 'images', 'content','releaseDate']
+        let _clr = ['title', 'typeIndex', 'date', 'time', 'images', 'content','releaseDate','number']
         for (let s in _clr) {
             wx.clearStorageSync(s);
         }
@@ -232,6 +242,7 @@ Page ({
             content: _res
         })
         wx.setStorageSync('content', _res)
+        wx.setStorageSync('number', _res.length)
     },
 
     releaseActivity() {

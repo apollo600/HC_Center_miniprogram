@@ -3,7 +3,7 @@
     <!-- 返回键 -->
     <view style="display: flex; align-items: center;">
         <block wx:if="{{back}}">
-            <image src="../../../images/arrow.svg" class="back-button" bindtap="back"></image>
+            <image src="https://636c-cloud1-6g2x8d0wb706c41a-1312427997.tcb.qcloud.la/arrow.svg?sign=8cda4308ea303a527199f522a9b16a70&t=1656397789" class="back-button" bindtap="back"></image>
             <text style='display:inline-block;width:8px' bindtap="back"></text>
         </block>
         <block wx:else="{{back}}">
@@ -100,8 +100,8 @@
                     <view class="weui-cells__title" style="padding-left: 16px; color: #A9A9A9;">支持使用Markdown语法</view>
                     <view class="weui-cell" hover-class="weui-cell_active">
                         <view class="weui-cell__bd">
-                            <textarea class="weui-textarea" auto-height placeholder="请输入活动详情内容" placeholder-class="weui-input__placeholder" rows="4" style="min-height: 200rpx;" maxlength="-1" value="{{content}}" bindconfirm="contentChanged" bindblur="contentChanged"></textarea>
-                            <view aria-role="option" class="weui-textarea-counter"><span>0</span>/200</view>
+                            <textarea class="weui-textarea"  auto-height placeholder="请输入活动详情内容" placeholder-class="weui-input__placeholder" rows="4" style="min-height: 200rpx;" maxlength="-1" value="{{content}}" bindconfirm="contentChanged" bindblur="contentChanged" bindinput="inputText"></textarea>
+                            <view aria-role="option" class="weui-textarea-counter"><span>{{number}}/200</span></view>
                         </view>
                     </view>
 
