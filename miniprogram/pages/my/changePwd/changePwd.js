@@ -27,59 +27,64 @@ Page({
     checkPwd() {
         console.log("检查密码");
         let that = this;       
-        db.collection('userInfo').where({
-           id: app.globalData.account
-        }).get({
-            success: function(res) {
-              if(that.data.inputOldPwd == '' || that.data.inputNewPwd == '' || that.data.inputCheckPwd == ''){
-                wx.showToast({
-                    title: '输入不能为空',
-                    icon:'error'
-                });
-            } else if(that.data.inputOldPwd != app.globalData['password']) {
-                console.log("输入旧密码",that.data.inputOldPwd,"全局变量密码",app.globalData['password'])
-                wx.showToast({
-                    title: '旧密码输入错误',
-                    icon:'error'
-                });
-                return;
-            } else if(that.data.inputNewPwd != that.data.inputCheckPwd){
-                wx.showToast({
-                    title: '两次输入不一致',
-                    icon:'error'
-                  });
-                return;
-            } else {
-                wx.showToast({
-                    title: '修改密码成功，请重新登录',
-                    icon: 'success',
-                })
-                setTimeout(function() {
-                    try {
-                        console.log("更新数据");
-                        db.collection('userInfo').where({
+            
+        if(that.data.inputOldPwd == '' || that.data.inputNewPwd == '' || that.data.inputCheckPwd== '') {
+            wx.showToast({
+                title: '输入不能为空',
+                icon:'error'
+            });
+        } else if(that.data.inputOldPwd != app.globalData['password']) {
+            console.log("输入旧密码",that.data.inputOldPwd,"全局变量密码",app.globalDat['password'])
+            wx.showToast({
+                title: '旧密码输入错误',
+                icon:'error'
+            });
+            return;
+        } else if(that.data.inputNewPwd != that.data.inputCheckPwd){
+            wx.showToast({
+                title: '两次输入不一致',
+                icon:'error'
+              });
+            return;
+        } else {
+            wx.showLoading({
+              title: '更新密码中...',
+            })
+            try {
+                console.log("更新数据");
+                wx.cloud.callFunction({
+                    name: "update",
+                    data: {
+                        collection_name:"userInfo",
+                        condition: {
                             id: parseInt(app.globalData.account)
+                        },
+                        udata: {
+                            password: util.AES_ECB_ENCRYPT(that.data.inputNewPwd, key)
+                        },
+                    },
+                    success: function() {
+                        wx.hideLoading({
+                          success: (res) => {
+                              wx.showModal({
+                                  content: '修改密码成功，请重新登录',
+                                  showCancel: false,
+                                  success: function() {
+                                    wx.redirectTo({
+                                        url: '../../login/index/index',
+                                    })
+                                }
+                              })
+                          },
                         })
-                        .update({
-                            data: {
-                                password: util.AES_ECB_ENCRYPT(that.data.inputNewPwd, key)
-                            },
-                            success: function() {
-                                wx.redirectTo({
-                                    url: '../../login/index/index',
-                                })
-                            }
-                        });
+                        
                     }
-                    catch (err) {
-                        console.error(err)
-                    } 
-                }, 1000)
+                })
             }
-            }
-          });
-  
-        
+            catch (err) {
+                console.error(err)
+            } 
+        }
     },
     inputOldPwdChanged(e) {
         this.setData({

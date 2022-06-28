@@ -389,9 +389,24 @@ Page({
                         if (_items[i].isSelected) {
                             console.log("删除第",i,"项","ID为:",_items[i].ID);
                             // let _members = [];
-                            db.collection('eventInfo').where({
-                                ID: _.eq(_items[i].ID)
+                            wx.cloud.callFunction({
+                                name: "delete",
+                                data: {
+                                    collection_name: "eventInfo",
+                                    condition:  {
+                                        ID: _items[i].ID
+                                    }
+                                },
+                                success: function(res) {
+                                    console.log("==从数据库删除==", res);
+                                    // 从每个报名的学生中删除这一项
+                                },
+                                error: function(err) {
+                                    console.log("==更改活动信息失败==", err);
+                                }
                             })
+
+                            
                             // .get({success: function(res) {
                             //     console.log("要删除的数据为:",res.data[0]);
                             //     _members = res.data[0].members;
@@ -427,16 +442,7 @@ Page({
                             //         })
                             //     }
                             // }})
-                            
-                            .remove()
-                            .then(res => {
-                                console.log("从数据库删除", res);
-                                // 从每个报名的学生中删除这一项
-                                
-                            })
-                            .catch(err => {
-                                console.error(err);
-                            })
+                           
                         }
                     }
                 }                           
