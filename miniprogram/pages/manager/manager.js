@@ -105,6 +105,7 @@ Page({
         let d_items = app.globalData.d_items;
         if (!(that.data.onDelete || that.data.onEdit)) {
             for (let i = 0; i < d_items.length; i++) {
+                console.log("查找", _ID, "当前为", i, d_items[i].ID);
                 if (d_items[i].ID == _ID) {
                     _index = i;
                     break;

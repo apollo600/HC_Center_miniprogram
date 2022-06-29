@@ -91,6 +91,9 @@ Page ({
                 content: '确定报名该活动吗？',
                 success (res) {
                     if (res.confirm) {
+                        wx.showLoading({
+                          title: '加载中...',
+                        })
                         console.log('用户点击确认, account:', app.globalData.account);
                         console.log("更改前成员集合: ", item.members);
                         let _push = true;
@@ -167,12 +170,18 @@ Page ({
                                                         console.log("==消息推送错误==", err);
                                                     }
                                                 })
-                                                wx.showToast({
-                                                    title: '报名成功！',
-                                                    icon: 'success'
-                                                })
-                                                wx.navigateBack({
-                                                    delta: 1,
+                                                wx.hideLoading({
+                                                  success: (res) => {
+                                                      wx.showToast({
+                                                        title: '报名成功！',
+                                                        icon: 'success',
+                                                        success: () => {
+                                                            wx.navigateBack({
+                                                                delta: 1,
+                                                            })
+                                                        }
+                                                    })
+                                                    },
                                                 })
                                             },
                                             error: function(err) {
