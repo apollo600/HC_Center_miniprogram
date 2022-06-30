@@ -274,6 +274,10 @@ Page ({
                                 wx.navigateBack({
                                     delta: 1,
                                 })
+                            })
+                            .catch(err => {
+                                console.log("==上传出错==", err);
+                                that.releaseActivity();
                             })                           
                     }
                     else {
@@ -318,6 +322,10 @@ Page ({
                             wx.navigateBack({
                                 delta: 1,
                             })
+                        })
+                        .catch(err => {
+                            console.log("==上传出错==", err);
+                            that.releaseActivity();
                         })
                     }
                 }
