@@ -151,12 +151,17 @@ Page({
                                       app.globalData.loggedIn = true;
                                       app.globalData.name = _res[i].name;
                                       
-                                      wx.showToast({
-                                        title: '登录成功',
-                                        icon:'su'
+                                      wx.hideLoading({
+                                        success: (res) => {
+                                            wx.showToast({
+                                                title: '登录成功',
+                                                icon:'su',
+                                            })
+                                            .then(() => {
+                                                that.loginTouched();
+                                            })
+                                        },
                                     })
-                                    wx.hideLoading();
-                                    that.loginTouched();
                                   } 
                                   else{
                                       wx.showToast({
