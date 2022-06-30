@@ -37,7 +37,8 @@ Page({
         items: [],
         searchContent: "",
         showSearch: false,
-        isEmpty: false
+        isEmpty: false,
+        ids: []
     },
 
     onShow() {
@@ -54,6 +55,9 @@ Page({
             console.log("获取指定用户", res.data[0]);
             let userItem = res.data[0];
             let ids = userItem.signedUpEventsID; 
+            that.setData({
+                ids: ids
+            });
             console.log("用户已报名活动", ids);
             db.collection('eventInfo').where({
                 ID: _.in(ids)
@@ -197,6 +201,13 @@ Page({
                         console.log("拼接后", t_items);
                     }
                     // 预处理t
+                    console.log("已报名ID:", that.data.ids);
+                    t_items.map((val, i) => {
+                        console.log("搜索此次id", val.ID);
+                        if (!that.data.ids.includes(val.ID)) {
+                            t_items.splice(i, 1);
+                        }
+                    })
                     t_items.sort(function(a, b) {
                         return a.d < b.d ? 1 : -1;
                     })
