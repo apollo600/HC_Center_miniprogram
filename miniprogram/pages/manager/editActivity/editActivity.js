@@ -328,7 +328,8 @@ Page ({
                     });
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.log("==向数据库加入错误==", error);
+                    that.releaseActivity();
                 })
             })
             
