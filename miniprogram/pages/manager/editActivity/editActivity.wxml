@@ -101,7 +101,7 @@
                     <view class="weui-cell" hover-class="weui-cell_active">
                         <view class="weui-cell__bd">
                             <textarea class="weui-textarea" auto-height placeholder="请输入活动详情内容" placeholder-class="weui-input__placeholder" rows="4" style="min-height: 200rpx;" maxlength="-1" value="{{content}}" bindconfirm="contentChanged" bindblur="contentChanged"bindinput="inputText"></textarea>
-                            <view aria-role="option" class="weui-textarea-counter"><span>{{number}}/200</span></view>
+                            <view aria-role="option" class="weui-textarea-counter"><span>{{number}}字</span></view>
                         </view>
                     </view>
 
