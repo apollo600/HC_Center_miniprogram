@@ -255,14 +255,16 @@ Page({
 
     cancelSearch() {
         let that = this;
-        setTimeout(function() {
-            that.setData({
-                showSearch: false,
-                items: app.globalData['d_items'],
-                searchContent: ""
-            })
+        that.setData({
+            showSearch: false,
+            searchContent: "",
+        }, () => {
+            wx.redirectTo({
+                url: './checkSignedEvents',
+              })
+            console.log("取消搜索");
         })
-        console.log("取消搜索");
+        
     },
 
     searchLeft() {

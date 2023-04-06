@@ -27,20 +27,24 @@ Page({
     checkPwd() {
         console.log("检查密码");
         let that = this;       
+
+        for (let i in app.globalData) {
+            console.log("--check--", "全局变量", i, app.globalData[i])
+        }
             
-        if(that.data.inputOldPwd == '' || that.data.inputNewPwd == '' || that.data.inputCheckPwd== '') {
+        if (that.data.inputOldPwd == '' || that.data.inputNewPwd == '' || that.data.inputCheckPwd== '') {
             wx.showToast({
                 title: '输入不能为空',
                 icon:'error'
             });
-        } else if(that.data.inputOldPwd != app.globalData['password']) {
-            console.log("输入旧密码",that.data.inputOldPwd,"全局变量密码",app.globalDat['password'])
+        } else if (that.data.inputOldPwd != app.globalData['password']) {
+            console.log("输入旧密码",that.data.inputOldPwd,"全局变量密码",app.globalData['password'])
             wx.showToast({
                 title: '旧密码输入错误',
                 icon:'error'
             });
             return;
-        } else if(that.data.inputNewPwd != that.data.inputCheckPwd){
+        } else if (that.data.inputNewPwd != that.data.inputCheckPwd){
             wx.showToast({
                 title: '两次输入不一致',
                 icon:'error'

@@ -63,7 +63,7 @@ App({
     for (let i in data) {
       if (data[i] === undefined) {
         data[i] = wx.getStorageSync(i);
-        console.log("--init--", "从缓存获取数据", i, data[i])
+        console.log("--init--", "从缓存获取数据", i, that.globalData[i])
       }
     }
     if (data['rememberme'] === true) {

@@ -11,12 +11,12 @@
         <text style='display:inline-block;width:10px'></text>
       </block>
 
-      HC活动中心
+      法治广场
     </view>
   </nav>
 
   <view class="title-top" bindtap="tmp_clear">
-    近期活动
+    每日一法
   </view>
   
   <view class="activity-container">
@@ -26,8 +26,8 @@
       <view class="activity">
         <view class="entry">
           <view style="white-space: pre;">{{item.short_date}}</view> 
-          <view class="note">{{item.time}}</view>
-          <view class="note">{{item.type}}</view>
+          <!-- <view class="note">{{item.time}}</view> -->
+          <!-- <view class="note">{{item.type}}</view> -->
         </view>
         <view class="time-shaft">
           <view class="up-line"></view>
